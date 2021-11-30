@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package fr.caro_marc.rangeslider;
+package fr.caro_marc.rangeslider.controler;
 
 /**
  *
  * @author blanchma
  */
-public class RangeSlider {
+public class RangeSliderControler {
     
 }
