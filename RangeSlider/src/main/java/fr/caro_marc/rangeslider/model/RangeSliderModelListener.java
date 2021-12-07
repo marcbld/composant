@@ -15,7 +15,7 @@ import java.util.EventListener;
  */
 public interface RangeSliderModelListener extends EventListener{
     
-    public void onMaxUpdate (int max);
+    public void onMaxUpdate (RangeSliderModelEvent e);
     
-    public void onMinUpdate (int min);
+    public void onMinUpdate (RangeSliderModelEvent e);
 }

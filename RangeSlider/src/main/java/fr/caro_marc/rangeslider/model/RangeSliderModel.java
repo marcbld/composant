@@ -45,6 +45,7 @@ public class RangeSliderModel {
         max = aMax;
         
         support.firePropertyChange("max", oldMax, aMax);
+        fireMaxUpdate();
     }
 
     public int getMin() {
@@ -56,6 +57,7 @@ public class RangeSliderModel {
         min = aMin;
         
         support.firePropertyChange("min", oldMin, aMin);
+        fireMinUpdate();
     }
     
     public void addListener(RangeSliderModelListener listener){
@@ -64,6 +66,18 @@ public class RangeSliderModel {
     
     public void removelistener(RangeSliderModelListener listener){
         listeners.remove(listener);
+    }
+    
+    private void fireMinUpdate() {
+        listeners.forEach( l -> {
+            l.onMinUpdate(new RangeSliderModelEvent(this));
+        });
+    }
+    
+    private void fireMaxUpdate() {
+        listeners.forEach( l -> {
+            l.onMaxUpdate(new RangeSliderModelEvent(this));
+        });
     }
     
     
