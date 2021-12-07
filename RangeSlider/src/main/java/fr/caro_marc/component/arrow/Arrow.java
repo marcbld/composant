@@ -19,7 +19,7 @@ import javax.swing.JComponent;
 public class Arrow extends JComponent{
     
     //private GEOPoly arrowView;
-    private float myX;
+    private int myX = 0;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
@@ -41,6 +41,7 @@ public class Arrow extends JComponent{
                 Polygon polygon2 = new Polygon( xArrow, yArrow, 3);
                 g.setColor(Color.BLACK);
                 g.fillPolygon( polygon2); 
+                reshape(myX, getY(), getWidth(), getHeight());
                 break;
             case LEFT:
                 int xArrow2[] = { 5, 5, 15};
@@ -48,6 +49,7 @@ public class Arrow extends JComponent{
                 Polygon polygon3 = new Polygon( xArrow2, yArrow2, 3);
                 g.setColor(Color.BLACK);
                 g.fillPolygon( polygon3); 
+                reshape(myX, getY(), getWidth(), getHeight());
                 break;
             default:
                 int xArrow3[] = { 5, 15, 15};
@@ -55,8 +57,11 @@ public class Arrow extends JComponent{
                 Polygon polygon4 = new Polygon( xArrow3, yArrow3, 3);
                 g.setColor(Color.BLACK);
                 g.fillPolygon( polygon4); 
+                reshape(myX, getY(), getWidth(), getHeight());
                 break;
         }
+        
+
 
         
     
@@ -71,8 +76,21 @@ public class Arrow extends JComponent{
         support.firePropertyChange("type", oldType, myType);
     }
     
-    public final void setMyX(float theMyX) {
-        float oldMyX = myX;
+    public final void setMyX(int theMyX) {
+        int oldMyX = myX;
+        switch (myType){
+            case RIGHT:
+                System.out.println(myType);
+                myX = theMyX;
+                break;
+            case LEFT:
+                myX = theMyX - getWidth();
+                System.out.println(getWidth());
+                break;
+            default:
+                System.out.println("erreur de type");
+                break;
+        }
         myX = theMyX;
         repaint();
         support.firePropertyChange("myX", oldMyX, myX);

@@ -24,20 +24,16 @@ public class ArrowBeanInfo extends SimpleBeanInfo {
     // Property identifiers//GEN-FIRST:Properties
     private static final int PROPERTY_myX = 0;
     private static final int PROPERTY_type = 1;
-    private static final int PROPERTY_x = 2;
-    private static final int PROPERTY_y = 3;
 
     // Property array 
     /*lazy PropertyDescriptor*/
     private static PropertyDescriptor[] getPdescriptor(){
-        PropertyDescriptor[] properties = new PropertyDescriptor[4];
+        PropertyDescriptor[] properties = new PropertyDescriptor[2];
     
         try {
             properties[PROPERTY_myX] = new PropertyDescriptor ( "myX", fr.caro_marc.component.arrow.Arrow.class, null, "setMyX" ); // NOI18N
             properties[PROPERTY_type] = new PropertyDescriptor ( "type", fr.caro_marc.component.arrow.Arrow.class, null, "setType" ); // NOI18N
             properties[PROPERTY_type].setPropertyEditorClass ( fr.caro_marc.component.arrow.ArrowEditor.class );
-            properties[PROPERTY_x] = new PropertyDescriptor ( "x", fr.caro_marc.component.arrow.Arrow.class, "getX", null ); // NOI18N
-            properties[PROPERTY_y] = new PropertyDescriptor ( "y", fr.caro_marc.component.arrow.Arrow.class, "getY", null ); // NOI18N
         }
         catch(IntrospectionException e) {
             e.printStackTrace();
