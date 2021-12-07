@@ -19,7 +19,7 @@ import javax.swing.JComponent;
 public class Arrow extends JComponent{
     
     //private GEOPoly arrowView;
-    private float xLeft;
+    private float myX;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
@@ -69,6 +69,13 @@ public class Arrow extends JComponent{
                 : RIGHT;
         repaint();
         support.firePropertyChange("type", oldType, myType);
+    }
+    
+    public final void setMyX(float theMyX) {
+        float oldMyX = myX;
+        myX = theMyX;
+        repaint();
+        support.firePropertyChange("myX", oldMyX, myX);
     }
     
 //    public final void setMyX(int theMyX) {
