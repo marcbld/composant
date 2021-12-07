@@ -41,7 +41,7 @@ public class Arrow extends JComponent{
                 Polygon polygon2 = new Polygon( xArrow, yArrow, 3);
                 g.setColor(Color.BLACK);
                 g.fillPolygon( polygon2); 
-                reshape(myX, getY(), getWidth(), getHeight());
+                setBounds(myX, getY(), getWidth(), getHeight());
                 break;
             case LEFT:
                 int xArrow2[] = { 5, 5, 15};
