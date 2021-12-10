@@ -8,6 +8,10 @@ import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeSupport;
 import javax.swing.JComponent;
 
@@ -20,11 +24,11 @@ public class Bar extends JComponent {
     //Attributs 
     
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    private Color myColor;
     private final static int DEFAULT_WIDTH = 100;
     private final static int DEFAULT_HEIGHT = 20;
     private final static Color DEFAULT_COLOR = Color.GRAY;
     private final RangeSliderModel model;
+    private Color myColor;
     
     //Constructeur
     
@@ -39,6 +43,19 @@ public class Bar extends JComponent {
     public Bar(Color aColor, RangeSliderModel aModel) {
         myColor = aColor;
         model = aModel;
+        
+        this.addMouseMotionListener(new MouseMotionListener() {
+            @Override
+            public void mouseDragged(MouseEvent arg0) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+
+            @Override
+            public void mouseMoved(MouseEvent arg0) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+            
+        });
     }
     
    

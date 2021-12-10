@@ -9,6 +9,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import javax.swing.JComponent;
@@ -20,17 +22,18 @@ import javax.swing.JComponent;
 public class Arrow extends JComponent{
     
     //private GEOPoly arrowView;
-    private int myX = 0;
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
+    private final RangeSliderModel model;
+    
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
     private int myType;
     
+    private int myX = 0;
     
-    private final RangeSliderModel model;
+   
     
-    
-    //COnstroctors
+    //COnstructors
     
     public Arrow(){
         this(RIGHT, new RangeSliderModel());
@@ -40,11 +43,61 @@ public class Arrow extends JComponent{
         this(RIGHT, aModel);
     }
     
-    public Arrow(int newtype, RangeSliderModel aModel){
+    public Arrow(int aType, RangeSliderModel aModel){
         super();
-        myType = newtype;
+        myType = aType;
         model = aModel;
+        myX = this.getX();
+        
+        this.addMouseMotionListener(new MouseAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                System.out.println(e);
+                //la on peut fire les fonctions
+            }
+            
+        });
     }
+    
+    
+    //getters & setters
+    public int getType() {
+        return myType;
+    }
+    
+    public final void setType(int theType) {
+        int oldType = myType;
+        myType = (theType == RIGHT || theType == LEFT)
+                ? theType
+                : RIGHT;
+        repaint();
+        support.firePropertyChange("type", oldType, myType);
+    }
+    
+    public final int getMyX() {
+        return myX;
+    }
+    
+    public final void setMyX(int theMyX) {
+        int oldMyX = myX;
+        switch (myType){
+            case RIGHT:
+                myX = theMyX;
+                break;
+            case LEFT:
+                myX = theMyX + getWidth();  //changement du signe - en +
+                break;
+            default:
+                System.out.println("erreur de type");
+                break;
+        }
+        myX = theMyX;
+        repaint();
+        support.firePropertyChange("myX", oldMyX, myX);
+    }
+    
+    
+    //Methods
     
     @Override
     public void paint(Graphics g) {
@@ -75,55 +128,17 @@ public class Arrow extends JComponent{
                 setBounds(getX(), getY(), getWidth(), getHeight());
                 break;
         }
-        
-
-
-        
-    
     }
     
-    public final void setType(int theType) {
-        int oldType = myType;
-        myType = (theType == RIGHT || theType == LEFT)
-                ? theType
-                : RIGHT;
-        repaint();
-        support.firePropertyChange("type", oldType, myType);
-    }
     
-    public final void setMyX(int theMyX) {
-        int oldMyX = myX;
-        switch (myType){
-            case RIGHT:
-                System.out.println(myType);
-                myX = theMyX;
-                break;
-            case LEFT:
-                myX = theMyX - getWidth();
-                System.out.println(getWidth());
-                break;
-            default:
-                System.out.println("erreur de type");
-                break;
-        }
-        myX = theMyX;
-        repaint();
-        support.firePropertyChange("myX", oldMyX, myX);
-    }
-    
-//    public final void setMyX(int theMyX) {
-//        float oldMyX = xLeft;
-//        xLeft = (theMyX.getType() == float || theMyX.getType() == double)
-//                ? theMyX
-//                : 0.;
-//        repaint();
-//        support.firePropertyChange("myX", oldMyX, xLeft);
-//    }
     
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(20, 20);
     }
+    
+    
+    //Event management
     
     @Override
     public void addPropertyChangeListener(PropertyChangeListener listener) {
@@ -145,7 +160,6 @@ public class Arrow extends JComponent{
         support.removePropertyChangeListener(propertyName, listener);
     }
   
-    
     
     
 
