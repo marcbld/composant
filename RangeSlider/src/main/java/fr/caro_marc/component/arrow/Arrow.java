@@ -4,6 +4,7 @@
  */
 package fr.caro_marc.component.arrow;
 
+import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -25,6 +26,26 @@ public class Arrow extends JComponent{
     public final static int LEFT = 2;
     private int myType;
     
+    
+    private final RangeSliderModel model;
+    
+    
+    //COnstroctors
+    
+    public Arrow(){
+        this(RIGHT, new RangeSliderModel());
+    }
+    
+    public Arrow(RangeSliderModel aModel){
+        this(RIGHT, aModel);
+    }
+    
+    public Arrow(int newtype, RangeSliderModel aModel){
+        super();
+        myType = newtype;
+        model = aModel;
+    }
+    
     @Override
     public void paint(Graphics g) {
         
@@ -41,7 +62,8 @@ public class Arrow extends JComponent{
                 Polygon polygon2 = new Polygon( xArrow, yArrow, 3);
                 g.setColor(Color.BLACK);
                 g.fillPolygon( polygon2); 
-                setBounds(myX, getY(), getWidth(), getHeight());
+                //setBounds(myX, getY(), getWidth(), getHeight());
+                setBounds(getX(), getY(), getWidth(), getHeight());
                 break;
             case LEFT:
                 int xArrow2[] = { 5, 5, 15};
@@ -49,15 +71,8 @@ public class Arrow extends JComponent{
                 Polygon polygon3 = new Polygon( xArrow2, yArrow2, 3);
                 g.setColor(Color.BLACK);
                 g.fillPolygon( polygon3); 
-                reshape(myX, getY(), getWidth(), getHeight());
-                break;
-            default:
-                int xArrow3[] = { 5, 15, 15};
-                int yArrow3[] = { 10, 5, 15};
-                Polygon polygon4 = new Polygon( xArrow3, yArrow3, 3);
-                g.setColor(Color.BLACK);
-                g.fillPolygon( polygon4); 
-                reshape(myX, getY(), getWidth(), getHeight());
+                //setBounds(myX, getY(), getWidth(), getHeight());
+                setBounds(getX(), getY(), getWidth(), getHeight());
                 break;
         }
         
@@ -130,14 +145,7 @@ public class Arrow extends JComponent{
         support.removePropertyChangeListener(propertyName, listener);
     }
   
-    public Arrow(){
-        this(RIGHT);
-    }
     
-    public Arrow(int newtype){
-        super();
-        myType = newtype;
-    }
     
     
 

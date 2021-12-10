@@ -4,6 +4,7 @@
  */
 package fr.caro_marc.component.bar;
 
+import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -23,15 +24,21 @@ public class Bar extends JComponent {
     private final static int DEFAULT_WIDTH = 100;
     private final static int DEFAULT_HEIGHT = 20;
     private final static Color DEFAULT_COLOR = Color.GRAY;
+    private final RangeSliderModel model;
     
     //Constructeur
     
     public Bar() { 
-        this(DEFAULT_COLOR);
+        this(DEFAULT_COLOR, new RangeSliderModel());
     }
     
-    public Bar(Color aColor) {
+    public Bar(RangeSliderModel aModel) { 
+        this(DEFAULT_COLOR, aModel);
+    }
+    
+    public Bar(Color aColor, RangeSliderModel aModel) {
         myColor = aColor;
+        model = aModel;
     }
     
    

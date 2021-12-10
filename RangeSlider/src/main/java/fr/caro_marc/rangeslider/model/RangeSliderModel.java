@@ -24,7 +24,7 @@ public class RangeSliderModel {
     private static final int DEFAULT_MAX = 500;
     
     
-    
+    //Constructors
     public RangeSliderModel(){
         this(RangeSliderModel.DEFAULT_MIN, RangeSliderModel.DEFAULT_MAX);
     }
@@ -36,6 +36,8 @@ public class RangeSliderModel {
         min = MIN;
     }
 
+    
+    //Getters & setters
     public int getMax() {
         return max;
     }
@@ -60,6 +62,8 @@ public class RangeSliderModel {
         fireMinUpdate();
     }
     
+    
+    //Event managment
     public void addListener(RangeSliderModelListener listener){
         listeners.add(listener);
     }
