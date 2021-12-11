@@ -4,36 +4,35 @@
  */
 package fr.caro_marc.component.bar;
 
-import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeSupport;
-import javax.swing.JComponent;
+import javax.swing.JButton;
 
 /**
  *
  * @author marcb
  */
-public class Bar extends JComponent {
-
+public class MiddleBar extends JButton {
+    
     //Attributs 
     
     private final static int DEFAULT_WIDTH = 100;
     private final static int DEFAULT_HEIGHT = 20;
-    private final static Color DEFAULT_COLOR = Color.GRAY;
-    private Color myColor;
+    private final static Color DEFAULT_COLOR = Color.BLUE;
     
     //Constructeur
     
-    public Bar() { 
+    public MiddleBar() { 
         this(DEFAULT_COLOR);
     }
     
-    public Bar(Color aColor) {
-        myColor = aColor;
+    public MiddleBar(Color aColor) {
+        super("");
+        setBackground(aColor);
         
         this.addMouseMotionListener(new MouseMotionListener() {
             @Override
@@ -54,12 +53,12 @@ public class Bar extends JComponent {
     //Setters & getters
     
     public Color getColor() {
-        return myColor;
+        return getBackground();
     }
 
     public void setColor(Color myColor) {
         Color oldValue = getColor();
-        this.myColor = myColor;
+        setBackground(myColor);
         repaint();
         
         firePropertyChange("couleur", oldValue, myColor);
@@ -69,21 +68,8 @@ public class Bar extends JComponent {
    
     
     //Method
-    private void test(){
-        
-    }
-    
-    
-    @Override
-    public void paint(Graphics g) {
-        g.setColor(myColor);
-        g.fillRect(0, 0, getWidth(), getHeight());
-    }
-    
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
-    
-    
 }

@@ -5,6 +5,7 @@
  */
 package fr.caro_marc.component.test;
 
+import fr.caro_marc.component.arrow.Arrow;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeEvent;
@@ -22,7 +23,7 @@ public class TestArrow extends javax.swing.JFrame {
     public TestArrow() {
         initComponents();
         
-        arrow3.addPropertyChangeListener(new PropertyChangeListener() {
+        arrow2.addPropertyChangeListener(new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 switch(evt.getPropertyName()){
@@ -31,6 +32,20 @@ public class TestArrow extends javax.swing.JFrame {
                         break;
                     case "myX":
                         System.out.println("myX: " + evt.getNewValue());
+                }
+            }
+            
+        });
+        
+        arrowIcon2.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int state = arrowIcon2.getType();
+                System.out.println(state);
+                if (state == Arrow.RIGHT) {
+                    arrowIcon2.setType(Arrow.LEFT);
+                } else {
+                    arrowIcon2.setType(Arrow.RIGHT);
                 }
             }
             
@@ -52,27 +67,32 @@ public class TestArrow extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        arrow3 = new fr.caro_marc.component.arrow.Arrow();
+        arrow2 = new fr.caro_marc.component.arrow.Arrow();
+        arrowIcon2 = new fr.caro_marc.component.arrow.arrow_icon.ArrowIcon();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        arrow3.setType(2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(206, Short.MAX_VALUE)
-                .addComponent(arrow3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(93, 93, 93))
+                .addContainerGap(202, Short.MAX_VALUE)
+                .addComponent(arrow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(178, 178, 178))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(103, 103, 103)
+                .addComponent(arrowIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(30, 30, 30)
-                .addComponent(arrow3, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addGap(45, 45, 45)
+                .addComponent(arrow2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96)
+                .addComponent(arrowIcon2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(119, Short.MAX_VALUE))
         );
 
         pack();
@@ -115,6 +135,7 @@ public class TestArrow extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private fr.caro_marc.component.arrow.Arrow arrow3;
+    private fr.caro_marc.component.arrow.Arrow arrow2;
+    private fr.caro_marc.component.arrow.arrow_icon.ArrowIcon arrowIcon2;
     // End of variables declaration//GEN-END:variables
 }

@@ -24,31 +24,37 @@
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <EmptySpace pref="206" max="32767" attributes="0"/>
-              <Component id="arrow3" min="-2" pref="101" max="-2" attributes="0"/>
-              <EmptySpace min="-2" pref="93" max="-2" attributes="0"/>
+              <EmptySpace pref="202" max="32767" attributes="0"/>
+              <Component id="arrow2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="178" max="-2" attributes="0"/>
+          </Group>
+          <Group type="102" alignment="0" attributes="0">
+              <EmptySpace min="-2" pref="103" max="-2" attributes="0"/>
+              <Component id="arrowIcon2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="0" attributes="0">
-              <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
-              <Component id="arrow3" min="-2" pref="102" max="-2" attributes="0"/>
-              <EmptySpace pref="168" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="arrow2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="-2" pref="96" max="-2" attributes="0"/>
+              <Component id="arrowIcon2" min="-2" max="-2" attributes="0"/>
+              <EmptySpace pref="119" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Container class="fr.caro_marc.component.arrow.Arrow" name="arrow3">
-      <Properties>
-        <Property name="type" type="int" value="2"/>
-      </Properties>
+    <Container class="fr.caro_marc.component.arrow.Arrow" name="arrow2">
 
       <Layout class="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout">
         <Property name="useNullLayout" type="boolean" value="true"/>
       </Layout>
     </Container>
+    <Component class="fr.caro_marc.component.arrow.arrow_icon.ArrowIcon" name="arrowIcon2">
+    </Component>
   </SubComponents>
 </Form>

@@ -6,7 +6,9 @@
 package fr.caro_marc.rangeslider.vue;
 
 import fr.caro_marc.component.arrow.Arrow;
+import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.Bar;
+import fr.caro_marc.component.bar.MiddleBar;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -19,8 +21,9 @@ import javax.swing.JPanel;
 public class RangeSlider extends JPanel {
 
     //Attributes
-    private final Bar leftBar, rightBar, lift;
-    private final Arrow leftArrow, rightArrow;
+    private final Bar leftBar, rightBar;
+    private final MiddleBar lift;
+    private final ArrowIcon leftArrow, rightArrow;
     private final FlowLayout layout;
     
     private final RangeSliderModel model;
@@ -33,11 +36,11 @@ public class RangeSlider extends JPanel {
     
     public RangeSlider(RangeSliderModel aModel) {
         layout = new FlowLayout();
-        leftBar = new Bar(aModel);
-        rightBar = new Bar(aModel);
-        lift = new Bar(Color.YELLOW, aModel);
-        leftArrow = new Arrow(Arrow.LEFT, aModel);
-        rightArrow = new Arrow(Arrow.RIGHT, aModel);
+        leftBar = new Bar();
+        rightBar = new Bar();
+        lift = new MiddleBar();
+        leftArrow = new ArrowIcon(ArrowIcon.LEFT);
+        rightArrow = new ArrowIcon(ArrowIcon.RIGHT);
         
         model = aModel;
         

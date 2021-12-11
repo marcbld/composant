@@ -13,6 +13,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 
 /**
@@ -21,9 +22,7 @@ import javax.swing.JComponent;
  */
 public class Arrow extends JComponent{
     
-    //private GEOPoly arrowView;
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    private final RangeSliderModel model;
+    //Attributes
     
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
@@ -33,27 +32,23 @@ public class Arrow extends JComponent{
     
    
     
-    //COnstructors
+    //Constructors
     
     public Arrow(){
-        this(RIGHT, new RangeSliderModel());
+        this(RIGHT);
     }
     
-    public Arrow(RangeSliderModel aModel){
-        this(RIGHT, aModel);
-    }
+
     
-    public Arrow(int aType, RangeSliderModel aModel){
+    public Arrow(int aType){
         super();
         myType = aType;
-        model = aModel;
         myX = this.getX();
         
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                System.out.println(e);
-                //la on peut fire les fonctions
+                setMyX(e.getXOnScreen());
             }
             
         });
@@ -71,7 +66,7 @@ public class Arrow extends JComponent{
                 ? theType
                 : RIGHT;
         repaint();
-        support.firePropertyChange("type", oldType, myType);
+        firePropertyChange("type", oldType, myType);
     }
     
     public final int getMyX() {
@@ -93,7 +88,7 @@ public class Arrow extends JComponent{
         }
         myX = theMyX;
         repaint();
-        support.firePropertyChange("myX", oldMyX, myX);
+        firePropertyChange("myX", oldMyX, myX);
     }
     
     
@@ -139,26 +134,6 @@ public class Arrow extends JComponent{
     
     
     //Event management
-    
-    @Override
-    public void addPropertyChangeListener(PropertyChangeListener listener) {
-        support.addPropertyChangeListener(listener);
-    }
-
-    @Override
-    public void removePropertyChangeListener(PropertyChangeListener listener) {
-        support.removePropertyChangeListener(listener);
-    }
-
-    @Override
-    public void addPropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        support.addPropertyChangeListener(propertyName, listener);
-    }
-
-    @Override
-    public void removePropertyChangeListener(String propertyName, PropertyChangeListener listener) {
-        support.removePropertyChangeListener(propertyName, listener);
-    }
   
     
     
