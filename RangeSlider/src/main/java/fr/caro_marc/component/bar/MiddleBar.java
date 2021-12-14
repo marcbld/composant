@@ -9,6 +9,7 @@ import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeEvent;
@@ -40,16 +41,30 @@ public class MiddleBar extends JButton {
         adapter = aAdapter;
         setBackground(aColor);
         
-        this.addMouseMotionListener(new MouseMotionListener() {
+        this.addMouseMotionListener(new MouseAdapter() {
+            boolean clicked = false;
+            double x;
+            
             @Override
-            public void mouseDragged(MouseEvent arg0) {
-                System.out.println("Not Supported yet");
+            public void mousePressed(MouseEvent arg0) {
+                clicked = true;
+                x = arg0.getX();
             }
 
             @Override
-            public void mouseMoved(MouseEvent arg0) {
-                System.out.println("Not supported yet");
+            public void mouseMoved(MouseEvent e) {
+                if (clicked){
+                    firePropertyChange("drag", 0, e.getX() - x);
+                    x = e.getX();
+                }
             }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                clicked = false;
+            }
+            
+            
             
         });
         
