@@ -1,6 +1,6 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ * Click nbfs://nbhost///SystemFile//System/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost///SystemFile//System/Templates/Classes/Class.java to edit this template
  */
 package fr.caro_marc.component.bar;
 
@@ -30,6 +30,9 @@ public class MiddleBar extends JButton {
     private final static Color DEFAULT_COLOR = Color.BLUE;
     private final RangeSliderAdapter adapter;
     
+    private boolean clicked = false;
+    private double x;
+    
     //Constructeur
     
     public MiddleBar(RangeSliderAdapter adapter) { 
@@ -41,30 +44,41 @@ public class MiddleBar extends JButton {
         adapter = aAdapter;
         setBackground(aColor);
         
-        this.addMouseMotionListener(new MouseAdapter() {
-            boolean clicked = false;
-            double x;
+        
+        
+        this.addMouseListener(new MouseAdapter() {
+            
             
             @Override
             public void mousePressed(MouseEvent arg0) {
                 clicked = true;
                 x = arg0.getX();
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                if (clicked){
-                    firePropertyChange("drag", 0, e.getX() - x);
-                    x = e.getX();
-                }
+                //System.out.println(x);
+                //System.out.println("clicked lift");
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 clicked = false;
+                //System.out.println("release lift");
             }
             
             
+            
+        });
+        
+        this.addMouseMotionListener(new MouseAdapter() {
+
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                //System.out.println(clicked);
+                if (clicked){
+                    firePropertyChange("drag", 0, e.getX() - x);
+                    x = e.getX();
+                    //System.out.println(x);
+                    //System.out.println("drag lift");
+                }
+            }            
             
         });
         

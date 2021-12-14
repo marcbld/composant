@@ -9,6 +9,7 @@ import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
 import java.beans.PropertyChangeSupport;
@@ -37,6 +38,14 @@ public class Bar extends JComponent {
     public Bar(Color aColor, RangeSliderAdapter aAdapter) {
         myColor = aColor;
         adapter = aAdapter;
+        
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                firePropertyChange("clickPosition", getX() + getWidth(), e.getX());         
+            }
+            
+        });
         
     }
     

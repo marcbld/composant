@@ -46,7 +46,7 @@ public class RangeSlider extends JPanel {
     public RangeSlider(RangeSliderModel aModel) {
         
         model = aModel;
-        adapter = new RangeSliderAdapter(model);
+        adapter = new RangeSliderAdapter(model, this);
         
         layout = new FlowLayout();
         leftBar = new LeftBar(adapter);

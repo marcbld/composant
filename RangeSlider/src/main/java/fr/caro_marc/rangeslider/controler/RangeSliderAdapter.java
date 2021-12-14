@@ -7,6 +7,7 @@ package fr.caro_marc.rangeslider.controler;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import fr.caro_marc.rangeslider.model.RangeSliderModelEvent;
 import fr.caro_marc.rangeslider.model.RangeSliderModelListener;
+import fr.caro_marc.rangeslider.vue.RangeSlider;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import javax.swing.JComponent;
@@ -21,9 +22,22 @@ public class RangeSliderAdapter extends JComponent{
     
     private double maxPix = 0.;
     private double minPix = 0.;
+    
+    private int MIN, MAX;
+    
+    private double sliderX;
+    private double sliderWidth; 
+    
+    private RangeSlider slider;
 
-    public RangeSliderAdapter(RangeSliderModel model) {
+    public RangeSliderAdapter(RangeSliderModel model, RangeSlider slider) {
         this.model = model;
+        
+        this.slider = slider;
+        MIN = slider.getMax();
+        MAX = slider.getMin();
+        this.sliderX = slider.getX();
+        this.sliderWidth = slider.getWidth();
         
         model.addPropertyChangeListener("max", new PropertyChangeListener() {
             @Override
@@ -45,8 +59,9 @@ public class RangeSliderAdapter extends JComponent{
         
     }
     
-    private int fromValuetoPix(int value) {
-        return 0;
+     private int fromValuetoPix(int value) {
+        double pix = value * (double)sliderWidth / (double)MAX ;
+        return (int)pix;
     } 
     
 }
