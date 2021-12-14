@@ -26,7 +26,9 @@ public class RangeSlider extends JPanel {
     private final ArrowIcon leftArrow, rightArrow;
     private final FlowLayout layout;
     
-    private final RangeSliderModel model;
+    private RangeSliderModel model;
+    
+    private int MIN = 0, MAX = 100;
     
     //Constructor
     
@@ -44,26 +46,48 @@ public class RangeSlider extends JPanel {
         
         model = aModel;
         
-        layout.setHgap(1);
-        this.setLayout(layout);
-        this.add(leftBar);
-        this.add(leftArrow);
-        this.add(lift);
-        this.add(rightArrow);
-        this.add(rightBar);
-        this.setBackground(Color.red);
+        layout.setHgap(0);
+        setLayout(layout);
+        add(leftBar);
+        add(leftArrow);
+        add(lift);
+        add(rightArrow);
+        add(rightBar);
+        setBackground(Color.red);
     }
     
     
+    //Getters & setters
+    public RangeSliderModel getModel(){
+        return model;
+        
+    }
+    
+    public void setModel(RangeSliderModel model) {
+        this.model = model;
+    }
+
+    public int getMin() {
+        return MIN;
+    }
+
+    public void setMin(int MIN) {
+        this.MIN = MIN;
+    }
+
+    public int getMax() {
+        return MAX;
+    }
+
+    public void setMax(int MAX) {
+        this.MAX = MAX;
+    }
     
     
-    
-    //Setter and getter
-    
-    
+
     //Methods
     @Override
-    public void setBounds(int x, int y, int width, int height){
+    public void setBounds(int x, int y, int width, int height) {
         super.setBounds(x, y, width, height);
         leftBar.setBounds(x, y, width, height);
         rightBar.setBounds(x, y, width, height);

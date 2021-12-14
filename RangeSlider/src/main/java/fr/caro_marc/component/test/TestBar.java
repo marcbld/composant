@@ -34,6 +34,11 @@ public class TestBar extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         middleBar3.setText("middleBar3");
+        middleBar3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                middleBar3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -60,6 +65,10 @@ public class TestBar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void middleBar3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_middleBar3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_middleBar3ActionPerformed
 
     /**
      * @param args the command line arguments

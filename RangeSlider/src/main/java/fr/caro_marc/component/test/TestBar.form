@@ -56,6 +56,9 @@
       <Properties>
         <Property name="text" type="java.lang.String" value="middleBar3"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="middleBar3ActionPerformed"/>
+      </Events>
     </Component>
     <Container class="fr.caro_marc.component.bar.Bar" name="bar2">
 
