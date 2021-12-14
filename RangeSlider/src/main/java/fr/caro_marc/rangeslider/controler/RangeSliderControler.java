@@ -9,7 +9,13 @@ import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.Bar;
 import fr.caro_marc.component.bar.MiddleBar;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
+import fr.caro_marc.rangeslider.model.RangeSliderModelEvent;
+import fr.caro_marc.rangeslider.model.RangeSliderModelListener;
 import fr.caro_marc.rangeslider.vue.RangeSlider;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
@@ -44,6 +50,57 @@ public class RangeSliderControler {
         rangeSliderWidth = slider.getWidth();
         MIN = slider.getMax();
         MAX = slider.getMin();
+        
+        
+        leftBar.addPropertyChangeListener("temporaire", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                //prevenir le modèle du changement de min après calcul
+            }
+        });
+        
+        leftArrow.addPropertyChangeListener("myX", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                System.out.println("ici le controleur");
+                //prévnient le modèle du changement de min après calcul
+            }
+        }) ;
+        
+        lift.addPropertyChangeListener("pos", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                //previent le modèle du changement de min et max (après calcul)
+                model.setMax(MAX);
+                
+            }
+        }) ;
+        
+        rightArrow.addPropertyChangeListener("tempo", (PropertyChangeEvent evt) -> {
+            //previent le modèle du changement de max (après calcul)
+        });
+        
+        rightBar.addPropertyChangeListener("tempo", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                //prévient le modèle du changement de max (après calcul)
+            }
+        });
+        
+        
+       
+        
+    }
+    
+    
+    //Methods
+    
+    private int fromPixtoValue(double pix){
+        return 0;
+    }
+    
+    private int fromValuetoPix(int value) {
+        return 0;
     }
     
     

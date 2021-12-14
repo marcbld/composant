@@ -12,11 +12,9 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.sql.Array;
 import java.util.stream.IntStream;
 import javax.swing.Icon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 /**
  *
@@ -94,6 +92,8 @@ public class ArrowIcon extends JButton{
         super("");
         myType = aType;
         myX = this.getX();
+        
+        
         
         switch(myType) {
             case LEFT:

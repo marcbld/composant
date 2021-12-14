@@ -9,6 +9,7 @@ import fr.caro_marc.component.arrow.Arrow;
 import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.Bar;
 import fr.caro_marc.component.bar.MiddleBar;
+import fr.caro_marc.rangeslider.controler.RangeSliderControler;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.FlowLayout;
@@ -27,6 +28,7 @@ public class RangeSlider extends JPanel {
     private final FlowLayout layout;
     
     private RangeSliderModel model;
+    private RangeSliderControler control;
     
     private int MIN = 0, MAX = 100;
     
@@ -37,12 +39,15 @@ public class RangeSlider extends JPanel {
     }
     
     public RangeSlider(RangeSliderModel aModel) {
+        
         layout = new FlowLayout();
         leftBar = new Bar();
         rightBar = new Bar();
         lift = new MiddleBar();
         leftArrow = new ArrowIcon(ArrowIcon.LEFT);
         rightArrow = new ArrowIcon(ArrowIcon.RIGHT);
+        
+        control = new RangeSliderControler(leftArrow, rightArrow, leftBar, rightBar, lift, this, model);
         
         model = aModel;
         
