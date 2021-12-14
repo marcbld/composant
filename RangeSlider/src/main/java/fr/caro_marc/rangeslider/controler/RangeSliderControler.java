@@ -52,7 +52,7 @@ public class RangeSliderControler {
         MAX = slider.getMin();
         
         
-        leftBar.addPropertyChangeListener("temporaire", new PropertyChangeListener() {
+        leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prevenir le modèle du changement de min après calcul
@@ -67,7 +67,7 @@ public class RangeSliderControler {
             }
         }) ;
         
-        lift.addPropertyChangeListener("pos", new PropertyChangeListener() {
+        lift.addPropertyChangeListener("drag", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
@@ -76,11 +76,11 @@ public class RangeSliderControler {
             }
         }) ;
         
-        rightArrow.addPropertyChangeListener("tempo", (PropertyChangeEvent evt) -> {
+        rightArrow.addPropertyChangeListener("myX", (PropertyChangeEvent evt) -> {
             //previent le modèle du changement de max (après calcul)
         });
         
-        rightBar.addPropertyChangeListener("tempo", new PropertyChangeListener() {
+        rightBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prévient le modèle du changement de max (après calcul)
