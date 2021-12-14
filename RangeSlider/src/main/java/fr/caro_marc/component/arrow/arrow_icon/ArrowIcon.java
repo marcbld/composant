@@ -26,6 +26,7 @@ public class ArrowIcon extends JButton{
     
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
+    public final static int SIZE = 20;
     
     private final static Icon RIGHT_ICON = new Icon() {
         
@@ -111,6 +112,8 @@ public class ArrowIcon extends JButton{
             }
             
         });
+        
+        
     }
     
     

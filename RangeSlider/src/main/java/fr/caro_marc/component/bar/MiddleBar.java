@@ -4,11 +4,15 @@
  */
 package fr.caro_marc.component.bar;
 
+import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
+import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionListener;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import javax.swing.JButton;
 
@@ -23,15 +27,17 @@ public class MiddleBar extends JButton {
     private final static int DEFAULT_WIDTH = 100;
     private final static int DEFAULT_HEIGHT = 20;
     private final static Color DEFAULT_COLOR = Color.BLUE;
+    private final RangeSliderAdapter adapter;
     
     //Constructeur
     
-    public MiddleBar() { 
-        this(DEFAULT_COLOR);
+    public MiddleBar(RangeSliderAdapter adapter) { 
+        this(DEFAULT_COLOR, adapter);
     }
     
-    public MiddleBar(Color aColor) {
+    public MiddleBar(Color aColor, RangeSliderAdapter aAdapter) {
         super("");
+        adapter = aAdapter;
         setBackground(aColor);
         
         this.addMouseMotionListener(new MouseMotionListener() {
@@ -46,6 +52,26 @@ public class MiddleBar extends JButton {
             }
             
         });
+        
+
+        adapter.addPropertyChangeListener("minPix",  new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                //previent le modèle du changement de min et max (après calcul)
+                updateSize(evt);
+              
+            }
+        });
+        
+        adapter.addPropertyChangeListener("maxPix",  new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                //previent le modèle du changement de min et max (après calcul)
+                updateSize(evt);
+              
+            }
+        });
+        
     }
     
    
@@ -71,5 +97,11 @@ public class MiddleBar extends JButton {
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
+    }
+    
+    private void updateSize(PropertyChangeEvent evt) {
+        double delta = (double)evt.getNewValue() - (double)evt.getOldValue();
+        double nv = (double)getWidth()+ delta - (2* ArrowIcon.SIZE);
+        setBounds(getX(), getY(), (int)nv, getHeight());
     }
 }

@@ -11,6 +11,7 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 import javax.swing.JButton;
@@ -52,6 +53,8 @@ public class Arrow extends JComponent{
             }
             
         });
+        
+     
     }
     
     
@@ -87,7 +90,6 @@ public class Arrow extends JComponent{
                 break;
         }
         myX = theMyX;
-        repaint();
         firePropertyChange("myX", oldMyX, myX);
     }
     

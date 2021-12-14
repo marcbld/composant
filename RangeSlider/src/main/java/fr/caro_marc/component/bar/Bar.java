@@ -4,6 +4,7 @@
  */
 package fr.caro_marc.component.bar;
 
+import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -24,29 +25,19 @@ public class Bar extends JComponent {
     private final static int DEFAULT_WIDTH = 100;
     private final static int DEFAULT_HEIGHT = 20;
     private final static Color DEFAULT_COLOR = Color.GRAY;
+    private final RangeSliderAdapter adapter;
     private Color myColor;
     
     //Constructeur
     
-    public Bar() { 
-        this(DEFAULT_COLOR);
+    public Bar(RangeSliderAdapter adapter) { 
+        this(DEFAULT_COLOR, adapter);
     }
     
-    public Bar(Color aColor) {
+    public Bar(Color aColor, RangeSliderAdapter aAdapter) {
         myColor = aColor;
+        adapter = aAdapter;
         
-        this.addMouseMotionListener(new MouseMotionListener() {
-            @Override
-            public void mouseDragged(MouseEvent arg0) {
-                System.out.println("Not Supported yet");
-            }
-
-            @Override
-            public void mouseMoved(MouseEvent arg0) {
-                System.out.println("Not supported yet");
-            }
-            
-        });
     }
     
    

@@ -8,7 +8,10 @@ package fr.caro_marc.rangeslider.vue;
 import fr.caro_marc.component.arrow.Arrow;
 import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.Bar;
+import fr.caro_marc.component.bar.LeftBar;
 import fr.caro_marc.component.bar.MiddleBar;
+import fr.caro_marc.component.bar.RightBar;
+import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import fr.caro_marc.rangeslider.controler.RangeSliderControler;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
@@ -22,13 +25,15 @@ import javax.swing.JPanel;
 public class RangeSlider extends JPanel {
 
     //Attributes
-    private final Bar leftBar, rightBar;
+    private final LeftBar leftBar;
+    private final RightBar rightBar;
     private final MiddleBar lift;
     private final ArrowIcon leftArrow, rightArrow;
     private final FlowLayout layout;
     
     private RangeSliderModel model;
     private RangeSliderControler control;
+    private RangeSliderAdapter adapter;
     
     private int MIN = 0, MAX = 100;
     
@@ -40,16 +45,18 @@ public class RangeSlider extends JPanel {
     
     public RangeSlider(RangeSliderModel aModel) {
         
+        model = aModel;
+        adapter = new RangeSliderAdapter(model);
+        
         layout = new FlowLayout();
-        leftBar = new Bar();
-        rightBar = new Bar();
-        lift = new MiddleBar();
+        leftBar = new LeftBar(adapter);
+        rightBar = new RightBar(adapter);
+        lift = new MiddleBar(adapter);
         leftArrow = new ArrowIcon(ArrowIcon.LEFT);
         rightArrow = new ArrowIcon(ArrowIcon.RIGHT);
-        
         control = new RangeSliderControler(leftArrow, rightArrow, leftBar, rightBar, lift, this, model);
         
-        model = aModel;
+        
         
         layout.setHgap(0);
         setLayout(layout);

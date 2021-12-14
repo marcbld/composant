@@ -7,16 +7,16 @@ package fr.caro_marc.rangeslider.model;
 
 import java.beans.PropertyChangeSupport;
 import java.util.ArrayList;
+import javax.swing.JComponent;
 
 /**
  * La classe gère les valeurs min et max et prévient les différents composants 
  * de ses modifications
  * @author blanchma
  */
-public class RangeSliderModel {
+public class RangeSliderModel extends JComponent{
     
-    private final PropertyChangeSupport support = new PropertyChangeSupport(this);
-    private ArrayList<RangeSliderModelListener> listeners;
+    
     
     private final int MAX, MIN;
     private int max, min;
@@ -46,8 +46,7 @@ public class RangeSliderModel {
         int oldMax = this.max;
         max = aMax;
         
-        support.firePropertyChange("max", oldMax, aMax);
-        fireMaxUpdate();
+        firePropertyChange("max", oldMax, aMax);
     }
 
     public int getMin() {
@@ -58,31 +57,12 @@ public class RangeSliderModel {
         int oldMin = min;
         min = aMin;
         
-        support.firePropertyChange("min", oldMin, aMin);
-        fireMinUpdate();
+        firePropertyChange("min", oldMin, aMin);
     }
     
     
     //Event managment
-    public void addListener(RangeSliderModelListener listener){
-        listeners.add(listener);
-    }
     
-    public void removelistener(RangeSliderModelListener listener){
-        listeners.remove(listener);
-    }
-    
-    private void fireMinUpdate() {
-        listeners.forEach( l -> {
-            l.onMinUpdate(new RangeSliderModelEvent(this));
-        });
-    }
-    
-    private void fireMaxUpdate() {
-        listeners.forEach( l -> {
-            l.onMaxUpdate(new RangeSliderModelEvent(this));
-        });
-    }
     
     
 }
