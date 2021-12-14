@@ -54,6 +54,8 @@ public class RangeSlider extends JPanel {
         lift = new MiddleBar(adapter);
         leftArrow = new ArrowIcon(ArrowIcon.LEFT);
         rightArrow = new ArrowIcon(ArrowIcon.RIGHT);
+        
+        
         control = new RangeSliderControler(leftArrow, rightArrow, leftBar, rightBar, lift, this, model);
         
         
