@@ -22,23 +22,21 @@ import java.util.Set;
  * @author blanchma
  */
 public class RangeSliderControler {
-    
+
     //Attributes
-    
     private ArrowIcon leftArrow, rightArrow;
     private Bar leftBar, rightBar;
     private MiddleBar lift;
     private RangeSlider slider;
-    
-    private RangeSliderModel model;
-    
-    private int MIN, MAX;
-    
-    private double sliderX;
-    private double sliderWidth; 
-    
-    //Constructor
 
+    private RangeSliderModel model;
+
+    private int MIN, MAX;
+
+    private double sliderX;
+    private double sliderWidth;
+
+    //Constructor
     public RangeSliderControler(ArrowIcon leftArrow, ArrowIcon rightArrow, Bar leftBar, Bar rightBar, MiddleBar lift, RangeSlider slider, RangeSliderModel model) {
         this.leftArrow = leftArrow;
         this.rightArrow = rightArrow;
@@ -47,73 +45,87 @@ public class RangeSliderControler {
         this.lift = lift;
         this.slider = slider;
         this.model = model;
-        
-        MIN = slider.getMax();
-        MAX = slider.getMin();
+
+
+        MIN = slider.getMin();
+        MAX = slider.getMax();
         this.sliderX = slider.getX();
-        this.sliderWidth = processWidth();
-        System.out.println(sliderWidth);
-        
-        
+
         leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prevenir le modèle du changement de min après calcul
-                System.out.println("leftbar controller");
+                System.out.println("RangeSliderController: leftbar controller");
+                double clickPosition = (int) evt.getNewValue();
+                model.setMin(fromPixtoValue(clickPosition));
+
             }
         });
-        
+
         leftArrow.addPropertyChangeListener("myX", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                System.out.println("leftarrow controller");
+                System.out.println("RangeSliderController: leftarrow controller");
                 //prévnient le modèle du changement de min après calcul
+                double newValue = (int) evt.getNewValue();
+                int value = fromPixtoValue(newValue);
+                System.out.println(value);
+               // model.setMin(value);
             }
-        }) ;
-        
+        });
+
         lift.addPropertyChangeListener("drag", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
                 //model.setMax(MAX);
                 //System.out.println("lift controller");
-                double value = (double)lift.getX() + (double)evt.getNewValue();
+                double value = (double) lift.getX() + (double) evt.getNewValue();
                 System.out.println(value);
                 System.out.println(sliderWidth);
-                System.out.println(value/sliderWidth);
+                System.out.println(value / sliderWidth);
+
+            }
+        });
+
+        rightArrow.addPropertyChangeListener("myX", new PropertyChangeListener() {
+            //previent le modèle du changement de max (après calcul)
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                System.out.println("RangeSliderController: rightarrow controller");
+                double newValue = (int) evt.getNewValue();
+                int value = fromPixtoValue(newValue);
+                System.out.println(value);
                 
             }
-        }) ;
-        
-        rightArrow.addPropertyChangeListener("myX", (PropertyChangeEvent evt) -> {
-            //previent le modèle du changement de max (après calcul)
-            System.out.println("rightarrow controller");
         });
-        
+
         rightBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prévient le modèle du changement de max (après calcul)
-                System.out.println("rightbar controller");
+                System.out.println("RangeSliderController: rightbar controller");
             }
         });
-        
-        
-       
-        
+
+    }
+
+
+    public void setSliderWidth(double sliderWidth) {
+        this.sliderWidth = sliderWidth;
     }
     
     
+    
+
     //Methods
-    
-    private int fromPixtoValue(double pix){
-        double value = pix * (double)MAX / (double)sliderWidth;
-        return (int)value;
+    private int fromPixtoValue(double pix) {
+        double value = pix * (double) MAX / (double)slider.getWidth();
+        return (int) value;
     }
-    
-   
-    private double processWidth(){
-        return leftBar.getWidth() + 2*leftArrow.getWidth() + lift.getWidth() + rightBar.getWidth();
+
+    private void processWidth() {
+        setSliderWidth(slider.getWidth());
     }
-    
+
 }

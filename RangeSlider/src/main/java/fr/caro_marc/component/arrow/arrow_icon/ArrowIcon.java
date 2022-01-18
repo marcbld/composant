@@ -77,8 +77,8 @@ public class ArrowIcon extends JButton{
     
     private int myType;
     
-    private int myX = 10;
-    
+    private int myX;
+    private int eventX;
    
     
     //Constructors
@@ -105,10 +105,21 @@ public class ArrowIcon extends JButton{
                 break;
         }
         
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                ArrowIcon.this.eventX = e.getX();
+            }
+            
+        });
+        
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                setMyX(e.getXOnScreen());
+                int delta = e.getX() - ArrowIcon.this.eventX;
+                ArrowIcon.this.eventX = e.getX();
+                System.out.println("ARROWICON: "+ delta);
+                modifyMyX(delta);
             }
             
         });
@@ -139,22 +150,15 @@ public class ArrowIcon extends JButton{
         return myX;
     }
     
-    public final void setMyX(int theMyX) {
+    public final void modifyMyX(int theMyX) {
         int oldMyX = myX;
-        switch (myType){
-            case RIGHT:
-                myX = theMyX;
-                break;
-            case LEFT:
-                myX = theMyX + getWidth();  //changement du signe - en +
-                break;
-            default:
-                System.out.println("erreur de type");
-                break;
-        }
-        myX = theMyX;
+        myX = myX + theMyX;
         repaint();
         firePropertyChange("myX", oldMyX, myX);
+    }
+    
+    public final void setMyX(int myX) {
+        this.myX = myX;
     }
     
     
@@ -163,7 +167,7 @@ public class ArrowIcon extends JButton{
     
     
     @Override
-    public Dimension getPreferredSize() {
+    public final Dimension getPreferredSize() {
         return new Dimension(20, 20);
     }
     

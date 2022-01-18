@@ -54,6 +54,7 @@ public class RangeSliderModel extends JComponent{
     }
 
     public void setMin(int aMin) {
+        System.out.println("RangesliderController: setMin");
         int oldMin = min;
         min = aMin;
         

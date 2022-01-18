@@ -30,6 +30,7 @@ public class Arrow extends JComponent{
     private int myType;
     
     private int myX = 0;
+    private int eventX;
     
    
     
@@ -46,10 +47,22 @@ public class Arrow extends JComponent{
         myType = aType;
         myX = this.getX();
         
+        
+        
+        
+        this.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                Arrow.this.eventX = e.getX();
+            }
+            
+        });
+        
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                setMyX(e.getXOnScreen());
+                int delta = e.getX() - Arrow.this.eventX;
+                setMyX(delta);
             }
             
         });
@@ -80,16 +93,15 @@ public class Arrow extends JComponent{
         int oldMyX = myX;
         switch (myType){
             case RIGHT:
-                myX = theMyX;
+                myX = myX + theMyX;
                 break;
             case LEFT:
-                myX = theMyX + getWidth();  //changement du signe - en +
+                myX = myX + theMyX + getWidth();  //changement du signe - en +
                 break;
             default:
                 System.out.println("erreur de type");
                 break;
         }
-        myX = theMyX;
         firePropertyChange("myX", oldMyX, myX);
     }
     

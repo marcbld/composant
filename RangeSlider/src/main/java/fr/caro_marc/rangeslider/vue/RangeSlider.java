@@ -15,6 +15,7 @@ import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import fr.caro_marc.rangeslider.controler.RangeSliderControler;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FlowLayout;
 import javax.swing.JPanel;
 
@@ -25,41 +26,40 @@ import javax.swing.JPanel;
 public class RangeSlider extends JPanel {
 
     //Attributes
+    private final int DEFAULT_WIDTH = 200;
+    private final int DEFAULT_HEIGHT = 20;
+
     private final LeftBar leftBar;
     private final RightBar rightBar;
     private final MiddleBar lift;
     private final ArrowIcon leftArrow, rightArrow;
     private final FlowLayout layout;
-    
+
     private RangeSliderModel model;
     private RangeSliderControler control;
     private RangeSliderAdapter adapter;
-    
+
     private int MIN = 0, MAX = 100;
-    
+
     //Constructor
-    
-    public RangeSlider(){
+    public RangeSlider() {
         this(new RangeSliderModel());
     }
-    
+
     public RangeSlider(RangeSliderModel aModel) {
-        
+
         model = aModel;
         adapter = new RangeSliderAdapter(model, this);
-        
+
         layout = new FlowLayout();
         leftBar = new LeftBar(adapter);
         rightBar = new RightBar(adapter);
         lift = new MiddleBar(adapter);
         leftArrow = new ArrowIcon(ArrowIcon.LEFT);
         rightArrow = new ArrowIcon(ArrowIcon.RIGHT);
-        
-        
+
         control = new RangeSliderControler(leftArrow, rightArrow, leftBar, rightBar, lift, this, model);
-        
-        
-        
+
         layout.setHgap(0);
         setLayout(layout);
         add(leftBar);
@@ -68,15 +68,17 @@ public class RangeSlider extends JPanel {
         add(rightArrow);
         add(rightBar);
         setBackground(Color.red);
-    }
-    
-    
-    //Getters & setters
-    public RangeSliderModel getModel(){
-        return model;
         
+        
+        initiate();
     }
-    
+
+    //Getters & setters
+    public RangeSliderModel getModel() {
+        return model;
+
+    }
+
     public void setModel(RangeSliderModel model) {
         this.model = model;
     }
@@ -97,9 +99,16 @@ public class RangeSlider extends JPanel {
         this.MAX = MAX;
     }
     
-    
 
     //Methods
+    
+    private void initiate() {
+        leftArrow.setMyX(leftBar.getPreferredSize().width);
+        rightArrow.setMyX(leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width);
+    }
+    
+    
+    
     @Override
     public void setBounds(int x, int y, int width, int height) {
         super.setBounds(x, y, width, height);
@@ -109,4 +118,10 @@ public class RangeSlider extends JPanel {
         leftArrow.setBounds(x, y, width, height);
         rightArrow.setBounds(x, y, width, height);
     }
+
+    @Override
+    public void setPreferredSize(Dimension preferredSize) {
+        super.setPreferredSize(preferredSize); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+
 }
