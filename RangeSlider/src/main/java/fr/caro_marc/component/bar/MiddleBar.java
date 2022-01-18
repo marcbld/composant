@@ -87,7 +87,7 @@ public class MiddleBar extends JButton {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
-                updateSize(evt);
+                updateMin(evt);
               
             }
         });
@@ -96,7 +96,7 @@ public class MiddleBar extends JButton {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
-                updateSize(evt);
+                //updateSize(evt);
               
             }
         });
@@ -128,9 +128,15 @@ public class MiddleBar extends JButton {
         return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
     
-    private void updateSize(PropertyChangeEvent evt) {
+    private void updateMin(PropertyChangeEvent evt) {
         double delta = (double)evt.getNewValue() - (double)evt.getOldValue();
-        double nv = (double)getWidth()+ delta - (2* ArrowIcon.SIZE);
+        double nv = (double)getWidth() - delta;
+        setBounds(getX() + (int) delta, getY(), (int)nv, getHeight());
+    }
+    
+    private void updateMax(PropertyChangeEvent evt) {
+        double delta = (double)evt.getNewValue() - (double)evt.getOldValue();
+        double nv = (double)getWidth() + delta;
         setBounds(getX(), getY(), (int)nv, getHeight());
     }
 }

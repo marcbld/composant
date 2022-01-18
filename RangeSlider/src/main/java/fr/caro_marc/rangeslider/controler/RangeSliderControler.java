@@ -70,7 +70,7 @@ public class RangeSliderControler {
                 double newValue = (int) evt.getNewValue();
                 int value = fromPixtoValue(newValue);
                 System.out.println(value);
-               // model.setMin(value);
+                model.setMin(value);
             }
         });
 
@@ -96,6 +96,7 @@ public class RangeSliderControler {
                 double newValue = (int) evt.getNewValue();
                 int value = fromPixtoValue(newValue);
                 System.out.println(value);
+                model.setMax(value);
                 
             }
         });

@@ -43,6 +43,7 @@ public class RangeSliderModel extends JComponent{
     }
 
     public void setMax(int aMax) {
+        System.out.println("RangesliderController: setMax");
         int oldMax = this.max;
         max = aMax;
         

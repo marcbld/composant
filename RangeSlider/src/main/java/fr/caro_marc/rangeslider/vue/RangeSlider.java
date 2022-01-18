@@ -104,7 +104,7 @@ public class RangeSlider extends JPanel {
     
     private void initiate() {
         leftArrow.setMyX(leftBar.getPreferredSize().width);
-        rightArrow.setMyX(leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width);
+        rightArrow.setMyX(leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width + lift.getPreferredSize().width);
     }
     
     
