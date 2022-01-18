@@ -43,7 +43,7 @@ public class RangeSlider extends JPanel {
 
     //Constructor
     public RangeSlider() {
-        this(new RangeSliderModel());
+        this(new RangeSliderModel(0, 100));
     }
 
     public RangeSlider(RangeSliderModel aModel) {
@@ -59,6 +59,7 @@ public class RangeSlider extends JPanel {
         rightArrow = new ArrowIcon(ArrowIcon.RIGHT);
 
         control = new RangeSliderControler(leftArrow, rightArrow, leftBar, rightBar, lift, this, model);
+        adapter.setSliderWidth(control.getSliderWidth());
 
         layout.setHgap(0);
         setLayout(layout);

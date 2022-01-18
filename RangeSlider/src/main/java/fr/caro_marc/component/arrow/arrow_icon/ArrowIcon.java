@@ -149,7 +149,9 @@ public class ArrowIcon extends JButton {
     }
 
     public final void setMyX(int myX) {
+        int oldMyX = this.myX;
         this.myX = myX;
+        firePropertyChange("myX", oldMyX, myX);
     }
 
     //Methods

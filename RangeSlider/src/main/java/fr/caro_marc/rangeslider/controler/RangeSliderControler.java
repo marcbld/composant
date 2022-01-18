@@ -50,6 +50,7 @@ public class RangeSliderControler {
         MIN = slider.getMin();
         MAX = slider.getMax();
         this.sliderX = slider.getX();
+        this.sliderWidth = (double) ( leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width );
 
         leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
@@ -68,8 +69,9 @@ public class RangeSliderControler {
                 System.out.println("RangeSliderController: leftarrow controller");
                 //prévnient le modèle du changement de min après calcul
                 double newValue = (int) evt.getNewValue();
+                System.out.println("PixMin: " + newValue);
                 int value = fromPixtoValue(newValue);
-                System.out.println(value);
+                System.out.println("ValMin: "+value);
                 model.setMin(value);
             }
         });
@@ -94,8 +96,9 @@ public class RangeSliderControler {
             public void propertyChange(PropertyChangeEvent evt) {
                 System.out.println("RangeSliderController: rightarrow controller");
                 double newValue = (int) evt.getNewValue();
+                System.out.println("PixMax: " + newValue);
                 int value = fromPixtoValue(newValue);
-                System.out.println(value);
+                System.out.println("ValMax: "+value);
                 model.setMax(value);
                 
             }
@@ -115,13 +118,20 @@ public class RangeSliderControler {
     public void setSliderWidth(double sliderWidth) {
         this.sliderWidth = sliderWidth;
     }
+
+    public double getSliderWidth() {
+        return sliderWidth;
+    }
+    
+    
     
     
     
 
     //Methods
     private int fromPixtoValue(double pix) {
-        double value = pix * (double) MAX / (double)slider.getWidth();
+        System.out.println("RangeSliderController: fromPixtoValue " + (double) sliderWidth);
+        double value = pix * (double) MAX / (double)sliderWidth;
         return (int) value;
     }
 

@@ -22,10 +22,9 @@ public class RightBar extends Bar{
         adapter.addPropertyChangeListener("maxPix",  new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                //previent le modèle du changement de min et max (après calcul)
                 double delta = (double)evt.getNewValue() - (double)evt.getOldValue();
-                double nv = (double)getWidth()+ delta;
-                setBounds(getX(), getY(), (int)nv, getHeight());
+                double nv = (double)getWidth() - delta;
+                setBounds(getX() + (int) delta, getY(), (int)nv, getHeight());
               
             }
         });

@@ -96,7 +96,7 @@ public class MiddleBar extends JButton {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
-                //updateSize(evt);
+                updateMax(evt);
               
             }
         });
