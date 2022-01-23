@@ -81,11 +81,15 @@ public class RangeSliderControler {
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
                 //model.setMax(MAX);
-                //System.out.println("lift controller");
-                double value = (double) lift.getX() + (double) evt.getNewValue();
+                System.out.println("RangeSliderController: leftarrow controller");
+                double delta = (int) evt.getNewValue();
+                System.out.println(delta);
+                int value = fromPixtoValue(delta);
                 System.out.println(value);
-                System.out.println(sliderWidth);
-                System.out.println(value / sliderWidth);
+                
+                
+                model.setMin(model.getMin() + value);
+                model.setMax(model.getMax() + value);
 
             }
         });
@@ -109,6 +113,8 @@ public class RangeSliderControler {
             public void propertyChange(PropertyChangeEvent evt) {
                 //prévient le modèle du changement de max (après calcul)
                 System.out.println("RangeSliderController: rightbar controller");
+                double clickPosition = (int) evt.getNewValue() + rightBar.getX();
+                model.setMax(fromPixtoValue(clickPosition));
             }
         });
 
@@ -130,7 +136,7 @@ public class RangeSliderControler {
 
     //Methods
     private int fromPixtoValue(double pix) {
-        System.out.println("RangeSliderController: fromPixtoValue " + (double) sliderWidth);
+        //System.out.println("RangeSliderController: fromPixtoValue " + (double) sliderWidth);
         double value = pix * (double) MAX / (double)sliderWidth;
         return (int) value;
     }

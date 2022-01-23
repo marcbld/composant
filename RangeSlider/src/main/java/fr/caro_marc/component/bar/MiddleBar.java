@@ -22,91 +22,85 @@ import javax.swing.JButton;
  * @author marcb
  */
 public class MiddleBar extends JButton {
-    
+
     //Attributs 
-    
     private final static int DEFAULT_WIDTH = 100;
     private final static int DEFAULT_HEIGHT = 20;
     private final static Color DEFAULT_COLOR = Color.BLUE;
     private final RangeSliderAdapter adapter;
-    
+
     private boolean clicked = false;
-    private double x;
-    
+    private int xMouseDown;
+
     //Constructeur
-    
-    public MiddleBar(RangeSliderAdapter adapter) { 
+    public MiddleBar(RangeSliderAdapter adapter) {
         this(DEFAULT_COLOR, adapter);
     }
-    
+
     public MiddleBar(Color aColor, RangeSliderAdapter aAdapter) {
         super("");
         adapter = aAdapter;
         setBackground(aColor);
-        
-        
-        
+
         this.addMouseListener(new MouseAdapter() {
-            
-            
+
             @Override
-            public void mousePressed(MouseEvent arg0) {
+            public void mousePressed(MouseEvent e) {
                 clicked = true;
-                x = arg0.getX();
-                //System.out.println(x);
+                xMouseDown = e.getXOnScreen();
+                //System.out.println("xMouseDown pressed : " + xMouseDown);
                 //System.out.println("clicked lift");
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 clicked = false;
+                //System.out.println("xMouseDown released : " + xMouseDown);
                 //System.out.println("release lift");
             }
-            
-            
-            
+
         });
-        
+
         this.addMouseMotionListener(new MouseAdapter() {
 
             @Override
             public void mouseDragged(MouseEvent e) {
                 //System.out.println(clicked);
-                if (clicked){
-                    firePropertyChange("drag", 0, e.getX() - x);
-                    x = e.getX();
-                    //System.out.println(x);
+                if (clicked) {
+                    int delta = e.getXOnScreen() - xMouseDown;
+                    if (Math.abs(delta) >= 5) {
+                        firePropertyChange("drag", 0, delta);
+                        //System.out.println("xMouseDown drag delta : " + (e.getXOnScreen() - xMouseDown));
+                        xMouseDown = e.getXOnScreen();
+                    }
+
                     //System.out.println("drag lift");
                 }
-            }            
-            
-        });
-        
+            }
 
-        adapter.addPropertyChangeListener("minPix",  new PropertyChangeListener() {
+        });
+
+        adapter.addPropertyChangeListener("minPix", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
                 updateMin(evt);
-              
+
             }
         });
-        
-        adapter.addPropertyChangeListener("maxPix",  new PropertyChangeListener() {
+
+        adapter.addPropertyChangeListener("maxPix", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
                 updateMax(evt);
-              
+
             }
         });
-        
+
     }
-    
-   
-    
+
     //Setters & getters
-    
     public Color getColor() {
         return getBackground();
     }
@@ -115,28 +109,25 @@ public class MiddleBar extends JButton {
         Color oldValue = getColor();
         setBackground(myColor);
         repaint();
-        
+
         firePropertyChange("couleur", oldValue, myColor);
     }
 
-    
-   
-    
     //Method
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(DEFAULT_WIDTH, DEFAULT_HEIGHT);
     }
-    
+
     private void updateMin(PropertyChangeEvent evt) {
-        double delta = (double)evt.getNewValue() - (double)evt.getOldValue();
-        double nv = (double)getWidth() - delta;
-        setBounds(getX() + (int) delta, getY(), (int)nv, getHeight());
+        double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
+        double nv = (double) getWidth() - delta;
+        setBounds(getX() + (int) delta, getY(), (int) nv, getHeight());
     }
-    
+
     private void updateMax(PropertyChangeEvent evt) {
-        double delta = (double)evt.getNewValue() - (double)evt.getOldValue();
-        double nv = (double)getWidth() + delta;
-        setBounds(getX(), getY(), (int)nv, getHeight());
+        double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
+        double nv = (double) getWidth() + delta;
+        setBounds(getX(), getY(), (int) nv, getHeight());
     }
 }

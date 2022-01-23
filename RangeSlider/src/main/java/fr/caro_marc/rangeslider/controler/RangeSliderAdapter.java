@@ -20,13 +20,16 @@ public class RangeSliderAdapter extends JComponent{
     
     private RangeSliderModel model;
     
-    private double maxPix = 0.;
-    private double minPix = 0.;
+    private double maxPix;
+    private double minPix;
     
     private int MIN, MAX;
     
     private double sliderX;
     private double sliderWidth; 
+    
+    private boolean leftInitialised = false;
+    private boolean rightInitialised = false;
     
     private RangeSlider slider;
 
@@ -47,6 +50,12 @@ public class RangeSliderAdapter extends JComponent{
                 System.out.println("RangeSliderAdapter: MaxPropertyChange");
                 double newVal = fromValuetoPix((int)evt.getNewValue());
                 System.out.println(newVal);
+                
+                if (!leftInitialised) {
+                    maxPix = newVal;
+                    leftInitialised = true;
+                }
+                
                 firePropertyChange("maxPix", maxPix, newVal);
                 maxPix = newVal;
             }
@@ -55,10 +64,16 @@ public class RangeSliderAdapter extends JComponent{
         model.addPropertyChangeListener("min", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                System.out.println("RangeSliderAdapter: MinPropertyChange");
+                //System.out.println("RangeSliderAdapter: MinPropertyChange");
                 double newVal = fromValuetoPix((int)evt.getNewValue());
+                
+                if (!rightInitialised) {
+                    maxPix = newVal;
+                    rightInitialised = true;
+                }
+                
                 firePropertyChange("minPix", minPix, newVal);
-                System.out.println("minPix = " + newVal);
+                //System.out.println("minPix = " + newVal);
                 minPix = newVal;
             }
         });
@@ -66,7 +81,6 @@ public class RangeSliderAdapter extends JComponent{
     }
     
      private int fromValuetoPix(int value) {
-        System.out.println("RangeSliderAdapter: " + sliderWidth);
         double pix = value * (double)sliderWidth / (double)MAX ;
         return (int)pix;
     } 

@@ -4,6 +4,7 @@
  */
 package fr.caro_marc.component.arrow.arrow_icon;
 
+import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -11,6 +12,8 @@ import java.awt.Graphics;
 import java.awt.Polygon;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.util.stream.IntStream;
 import javax.swing.Icon;
 import javax.swing.JButton;
@@ -25,6 +28,7 @@ public class ArrowIcon extends JButton {
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
     public final static int SIZE = 20;
+    private boolean init = false;
 
     private final static Icon RIGHT_ICON = new Icon() {
 
@@ -78,11 +82,7 @@ public class ArrowIcon extends JButton {
     private int eventX;
 
     //Constructors
-    public ArrowIcon() {
-        this(RIGHT);
-    }
-
-    public ArrowIcon(int aType) {
+    public ArrowIcon(int aType, RangeSliderAdapter aAdapter) {
         super("");
         myType = aType;
         myX = this.getX();
@@ -98,8 +98,9 @@ public class ArrowIcon extends JButton {
 
         this.addMouseListener(new MouseAdapter() {
             @Override
-            public void mouseClicked(MouseEvent e) {
-                ArrowIcon.this.eventX = e.getX();
+            public void mousePressed(MouseEvent e) {
+                eventX = e.getXOnScreen();
+                //System.out.println("ArrowIcon: " + eventX);
             }
 
         });
@@ -107,14 +108,49 @@ public class ArrowIcon extends JButton {
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                int delta = e.getX() - ArrowIcon.this.eventX;
-                ArrowIcon.this.eventX = e.getX();
-                System.out.println("ARROWICON: " + delta);
+                System.out.println("ArrowIcon: dragged ");
+                int delta = e.getXOnScreen() - eventX;
+                eventX = e.getXOnScreen();
+                System.out.println("ArrowIcon: " + delta);
                 modifyMyX(delta);
             }
 
         });
 
+        aAdapter.addPropertyChangeListener("minPix", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (myType == LEFT) {
+                    //System.out.println("ArrowIcon: minPix");
+                    
+                    double newVal = (double) evt.getNewValue();
+                    double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
+                    //setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
+
+                    /*if (init) {
+                        myX += (int) delta;
+                    } else {
+                        myX = (int) delta;
+                        init = true;
+                    }*/
+                    myX = (int) newVal;
+                    System.out.println("ArrowIcon: minPix -> " + delta);
+                }
+
+            }
+        });
+
+        /*aAdapter.addPropertyChangeListener("maxPix", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                if (myType == RIGHT) {
+                    double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
+                    setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
+                    myX += (int) delta;
+                }
+
+            }
+        });*/
     }
 
     //getters & setters
@@ -141,16 +177,15 @@ public class ArrowIcon extends JButton {
         return myX;
     }
 
-    public final void modifyMyX(int theMyX) {
-        int oldMyX = myX;
-        myX = myX + theMyX;
-        repaint();
-        firePropertyChange("myX", oldMyX, myX);
+    public final void modifyMyX(int delta) {
+        setMyX(myX + delta);
+        System.out.println("ArrowIcon : modifyMyX -> " + (myX + delta));
     }
 
     public final void setMyX(int myX) {
         int oldMyX = this.myX;
         this.myX = myX;
+        System.out.println("ArrowIcon : setMyX -> from " + oldMyX + " to " + this.myX);
         firePropertyChange("myX", oldMyX, myX);
     }
 

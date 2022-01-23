@@ -22,6 +22,7 @@ public class RangeSliderModel extends JComponent{
     private int max, min;
     private static final int DEFAULT_MIN = 0;
     private static final int DEFAULT_MAX = 500;
+    private static final int OFFSET = 15;
     
     
     //Constructors
@@ -29,7 +30,7 @@ public class RangeSliderModel extends JComponent{
         this(RangeSliderModel.DEFAULT_MIN, RangeSliderModel.DEFAULT_MAX);
     }
     
-    public RangeSliderModel(int aMAX, int aMIN){
+    public RangeSliderModel(int aMIN, int aMAX){
         MAX = aMAX;
         MIN = aMIN;
         max = MAX;
@@ -43,11 +44,16 @@ public class RangeSliderModel extends JComponent{
     }
 
     public void setMax(int aMax) {
-        System.out.println("RangesliderController: setMin");
         int oldMax = this.max;
-        max = aMax;
-        
-        firePropertyChange("max", oldMax, aMax);
+        if (aMax >= MAX) {
+            max = MAX;
+        } else if (aMax <= min + OFFSET){
+            max = min + OFFSET;
+        }
+        else{
+            max = aMax;
+        }
+        firePropertyChange("max", oldMax, max);
     }
 
     public int getMin() {
@@ -55,11 +61,16 @@ public class RangeSliderModel extends JComponent{
     }
 
     public void setMin(int aMin) {
-        System.out.println("RangesliderController: setMin");
         int oldMin = min;
-        min = aMin;
-        
-        firePropertyChange("min", oldMin, aMin);
+        if (aMin <= MIN) {
+            min = MIN;
+        } else if (aMin >= max - OFFSET){
+            min = max - OFFSET;
+        }
+        else{
+            min = aMin;
+        }
+        firePropertyChange("min", oldMin, min);
     }
     
     
