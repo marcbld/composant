@@ -123,9 +123,8 @@ public class ArrowIcon extends JButton {
                 if (myType == LEFT) {
                     //System.out.println("ArrowIcon: minPix");
                     
-                    double newVal = (double) evt.getNewValue();
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
-                    //setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
+                    setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
 
                     /*if (init) {
                         myX += (int) delta;
@@ -133,24 +132,25 @@ public class ArrowIcon extends JButton {
                         myX = (int) delta;
                         init = true;
                     }*/
-                    myX = (int) newVal;
+                    //myX = getX();
                     System.out.println("ArrowIcon: minPix -> " + delta);
                 }
 
             }
         });
 
-        /*aAdapter.addPropertyChangeListener("maxPix", new PropertyChangeListener() {
+        aAdapter.addPropertyChangeListener("maxPix", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (myType == RIGHT) {
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
+                    System.out.println("ArrowIcon: maxPinx -> delta " + delta);
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
-                    myX += (int) delta;
+                    //myX += getX() + SIZE;
                 }
 
             }
-        });*/
+        });
     }
 
     //getters & setters
