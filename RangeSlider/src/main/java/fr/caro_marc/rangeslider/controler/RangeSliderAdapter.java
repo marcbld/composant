@@ -41,15 +41,11 @@ public class RangeSliderAdapter extends JComponent{
         MAX = slider.getMax();
         this.sliderX = slider.getX();
         
-        //System.out.println("RangeSliderAdapter: " + MIN);
-        //System.out.println("RangeSliderAdapter: " + MAX);
         
         model.addPropertyChangeListener("max", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                System.out.println("RangeSliderAdapter: MaxPropertyChange");
                 double newVal = fromValuetoPix((int)evt.getNewValue());
-                System.out.println(newVal);
                 
                 if (!leftInitialised) {
                     maxPix = newVal;
@@ -64,7 +60,6 @@ public class RangeSliderAdapter extends JComponent{
         model.addPropertyChangeListener("min", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                //System.out.println("RangeSliderAdapter: MinPropertyChange");
                 double newVal = fromValuetoPix((int)evt.getNewValue());
                 
                 if (!rightInitialised) {
@@ -73,7 +68,6 @@ public class RangeSliderAdapter extends JComponent{
                 }
                 
                 firePropertyChange("minPix", minPix, newVal);
-                //System.out.println("minPix = " + newVal);
                 minPix = newVal;
             }
         });

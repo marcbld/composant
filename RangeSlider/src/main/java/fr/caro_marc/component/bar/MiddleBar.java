@@ -48,15 +48,11 @@ public class MiddleBar extends JButton {
             public void mousePressed(MouseEvent e) {
                 clicked = true;
                 xMouseDown = e.getXOnScreen();
-                //System.out.println("xMouseDown pressed : " + xMouseDown);
-                //System.out.println("clicked lift");
             }
 
             @Override
             public void mouseReleased(MouseEvent e) {
                 clicked = false;
-                //System.out.println("xMouseDown released : " + xMouseDown);
-                //System.out.println("release lift");
             }
 
         });
@@ -65,16 +61,13 @@ public class MiddleBar extends JButton {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                //System.out.println(clicked);
                 if (clicked) {
                     int delta = e.getXOnScreen() - xMouseDown;
                     if (Math.abs(delta) >= 5) {
                         firePropertyChange("drag", 0, delta);
-                        //System.out.println("xMouseDown drag delta : " + (e.getXOnScreen() - xMouseDown));
                         xMouseDown = e.getXOnScreen();
                     }
 
-                    //System.out.println("drag lift");
                 }
             }
 
