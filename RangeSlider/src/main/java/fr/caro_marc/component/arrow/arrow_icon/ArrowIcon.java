@@ -28,7 +28,7 @@ public class ArrowIcon extends JButton {
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
     public final static int SIZE = 20;
-    private boolean init = false;
+    private boolean selfTriggered = false;
 
     private final static Icon RIGHT_ICON = new Icon() {
 
@@ -108,10 +108,11 @@ public class ArrowIcon extends JButton {
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                System.out.println("ArrowIcon: dragged ");
+                selfTriggered = true;
+                //System.out.println("ArrowIcon: dragged ");
                 int delta = e.getXOnScreen() - eventX;
                 eventX = e.getXOnScreen();
-                System.out.println("ArrowIcon: " + delta);
+                //System.out.println("ArrowIcon: " + delta);
                 modifyMyX(delta);
             }
 
@@ -132,8 +133,12 @@ public class ArrowIcon extends JButton {
                         myX = (int) delta;
                         init = true;
                     }*/
-                    //myX = getX();
-                    System.out.println("ArrowIcon: minPix -> " + delta);
+                    if(!selfTriggered) {
+                        System.out.println("update de myX car ca vient pas de moi");
+                        myX = getX();
+                    }
+                    selfTriggered = false;
+                    //System.out.println("ArrowIcon: minPix -> " + delta);
                 }
 
             }
@@ -144,9 +149,15 @@ public class ArrowIcon extends JButton {
             public void propertyChange(PropertyChangeEvent evt) {
                 if (myType == RIGHT) {
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
-                    System.out.println("ArrowIcon: maxPinx -> delta " + delta);
+                    //System.out.println("ArrowIcon: maxPinx -> delta " + delta);
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
-                    //myX += getX() + SIZE;
+                    
+                    
+                    if(!selfTriggered) {
+                        System.out.println("getX d'un propertyChangeListener : " + getX() );
+                        myX = getX() + SIZE;
+                    }
+                    selfTriggered = false;
                 }
 
             }

@@ -17,6 +17,7 @@ import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -77,7 +78,6 @@ public class RangeSlider extends JPanel {
     //Getters & setters
     public RangeSliderModel getModel() {
         return model;
-
     }
 
     public void setModel(RangeSliderModel model) {
@@ -98,6 +98,14 @@ public class RangeSlider extends JPanel {
 
     public void setMax(int MAX) {
         this.MAX = MAX;
+    }
+    
+    public void setMinLabel(JLabel label) {
+        model.setMinLabel(label);
+    }
+    
+    public void setMaxLabel(JLabel label) {
+        model.setMaxLabel(label);
     }
     
 
