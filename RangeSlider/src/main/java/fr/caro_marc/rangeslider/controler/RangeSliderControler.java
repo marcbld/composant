@@ -42,13 +42,12 @@ public class RangeSliderControler {
         this.slider = slider;
         this.model = model;
 
-
         MIN = slider.getMin();
         MAX = slider.getMax();
         this.sliderX = slider.getX();
-        this.sliderWidth = (double) (leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width );
+        this.sliderWidth = (double) (leftBar.getPreferredSize().width + 2 * leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width);
 
-        leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
+        /*leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prevenir le modèle du changement de min après calcul
@@ -56,15 +55,17 @@ public class RangeSliderControler {
                 model.setMin(fromPixtoValue(clickPosition));
 
             }
-        });
+        });*/
 
-        leftArrow.addPropertyChangeListener("myX", new PropertyChangeListener() {
+        leftArrow.addPropertyChangeListener("delta", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prévnient le modèle du changement de min après calcul
-                double newValue = (int) evt.getNewValue();
-                int value = fromPixtoValue(newValue);
-                model.setMin(value);
+                double delta = (int) evt.getNewValue();
+                double value = fromPixtoValue(delta);
+                //System.out.println("Controler: delta --> " + delta);
+                //System.out.println("Controler: value --> " + value);
+                model.setMin((double) model.getMin() + value);
             }
         });
 
@@ -73,23 +74,22 @@ public class RangeSliderControler {
             public void propertyChange(PropertyChangeEvent evt) {
                 //previent le modèle du changement de min et max (après calcul)
                 double delta = (int) evt.getNewValue();
-                int value = fromPixtoValue(delta);
-                
-                
-                model.setMin(model.getMin() + value);
-                model.setMax(model.getMax() + value);
+                double value = fromPixtoValue(delta);
+
+                model.setMin((double)model.getMin() + value);
+                model.setMax((double)model.getMax() + value);
 
             }
         });
 
-        rightArrow.addPropertyChangeListener("myX", new PropertyChangeListener() {
+        rightArrow.addPropertyChangeListener("delta", new PropertyChangeListener() {
             //previent le modèle du changement de max (après calcul)
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                double newValue = (int) evt.getNewValue();
-                int value = fromPixtoValue(newValue);
-                model.setMax(value);
-                
+                double delta = (int) evt.getNewValue();
+                double value = fromPixtoValue(delta);
+                model.setMax((double)model.getMax() + value);
+
             }
         });
 
@@ -103,7 +103,6 @@ public class RangeSliderControler {
 
     }
 
-
     public void setSliderWidth(double sliderWidth) {
         this.sliderWidth = sliderWidth;
     }
@@ -111,16 +110,14 @@ public class RangeSliderControler {
     public double getSliderWidth() {
         return sliderWidth;
     }
-    
-    
-    
-    
-    
 
     //Methods
-    private int fromPixtoValue(double pix) {
-        double value = pix * (double) MAX / (double)sliderWidth;
-        return (int) value;
+    private double fromPixtoValue(double pix) {
+        //System.out.println("Controller: avant traitement --> " + pix);
+        double value = pix * (double) (MAX - MIN) / (double) sliderWidth + MIN;
+        //System.out.println("Controler: après traitement --> " + value);
+
+        return value;
     }
 
 }

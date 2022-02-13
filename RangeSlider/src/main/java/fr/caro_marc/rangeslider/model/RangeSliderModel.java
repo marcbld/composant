@@ -19,7 +19,7 @@ import javax.swing.JLabel;
 public class RangeSliderModel extends JComponent {
 
     private final int MAX, MIN;
-    private int max, min;
+    private double max, min;
     private static final int DEFAULT_MIN = 0;
     private static final int DEFAULT_MAX = 500;
     private static final int OFFSET = 15;
@@ -38,12 +38,12 @@ public class RangeSliderModel extends JComponent {
     }
 
     //Getters & setters
-    public int getMax() {
+    public double getMax() {
         return max;
     }
 
-    public void setMax(int aMax) {
-        int oldMax = this.max;
+    public void setMax(double aMax) {
+        double oldMax = this.max;
         if (aMax >= MAX) {
             max = MAX;
         } else if (aMax <= min + OFFSET) {
@@ -56,12 +56,12 @@ public class RangeSliderModel extends JComponent {
 
     }
 
-    public int getMin() {
+    public double getMin() {
         return min;
     }
 
-    public void setMin(int aMin) {
-        int oldMin = min;
+    public void setMin(double aMin) {
+        double oldMin = min;
         if (aMin <= MIN) {
             min = MIN;
         } else if (aMin >= max - OFFSET) {
@@ -69,6 +69,8 @@ public class RangeSliderModel extends JComponent {
         } else {
             min = aMin;
         }
+        
+        //System.out.println("Modele: min --> " + aMin + " /// " + min);
 
         firePropertyChange("min", oldMin, min);
 

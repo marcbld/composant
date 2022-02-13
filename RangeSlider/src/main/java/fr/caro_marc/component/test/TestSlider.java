@@ -4,9 +4,6 @@
  */
 package fr.caro_marc.component.test;
 
-import fr.caro_marc.rangeslider.model.RangeSliderModel;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 
 /**
  *

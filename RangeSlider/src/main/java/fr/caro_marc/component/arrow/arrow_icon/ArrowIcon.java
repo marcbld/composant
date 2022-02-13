@@ -78,14 +78,12 @@ public class ArrowIcon extends JButton {
 
     private int myType;
 
-    private int myX;
-    private int eventX;
+    private int xPosition;
 
     //Constructors
     public ArrowIcon(int aType, RangeSliderAdapter aAdapter) {
         super("");
         myType = aType;
-        myX = this.getX();
 
         switch (myType) {
             case LEFT:
@@ -99,7 +97,8 @@ public class ArrowIcon extends JButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                eventX = e.getXOnScreen();
+                //TODO
+                xPosition = e.getXOnScreen();
             }
 
         });
@@ -107,10 +106,10 @@ public class ArrowIcon extends JButton {
         this.addMouseMotionListener(new MouseAdapter() {
             @Override
             public void mouseDragged(MouseEvent e) {
-                selfTriggered = true;
-                int delta = e.getXOnScreen() - eventX;
-                eventX = e.getXOnScreen();
-                modifyMyX(delta);
+                int x = e.getXOnScreen();
+                //System.out.println("ArrowIcon: delta -->" + (x - xPosition));
+                firePropertyChange("delta", 0, x - xPosition);
+                xPosition = x;
             }
 
         });
@@ -119,14 +118,9 @@ public class ArrowIcon extends JButton {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 if (myType == LEFT) {
-                    
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
 
-                    if(!selfTriggered) {
-                        myX = getX();
-                    }
-                    selfTriggered = false;
                 }
 
             }
@@ -138,12 +132,6 @@ public class ArrowIcon extends JButton {
                 if (myType == RIGHT) {
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
-                    
-                    
-                    if(!selfTriggered) {
-                        myX = getX() + SIZE;
-                    }
-                    selfTriggered = false;
                 }
 
             }
@@ -160,28 +148,12 @@ public class ArrowIcon extends JButton {
         if (theType == LEFT) {
             setIcon(LEFT_ICON);
             myType = theType;
-            myX = this.getX();
         } else {
             setIcon(RIGHT_ICON);
             myType = RIGHT;
-            myX = this.getX() + this.WIDTH;
         }
         repaint();
         firePropertyChange("type", oldType, myType);
-    }
-
-    public final int getMyX() {
-        return myX;
-    }
-
-    public final void modifyMyX(int delta) {
-        setMyX(myX + delta);
-    }
-
-    public final void setMyX(int myX) {
-        int oldMyX = this.myX;
-        this.myX = myX;
-        firePropertyChange("myX", oldMyX, myX);
     }
 
     //Methods
