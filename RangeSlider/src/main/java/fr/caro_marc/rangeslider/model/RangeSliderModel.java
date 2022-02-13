@@ -24,7 +24,6 @@ public class RangeSliderModel extends JComponent {
     private static final int DEFAULT_MAX = 500;
     private static final int OFFSET = 15;
 
-    private JLabel minLabel = null, maxLabel = null;
 
     //Constructors
     public RangeSliderModel() {
@@ -55,8 +54,6 @@ public class RangeSliderModel extends JComponent {
 
         firePropertyChange("max", oldMax, max);
 
-        //updateMaxLabel();
-
     }
 
     public int getMin() {
@@ -75,30 +72,8 @@ public class RangeSliderModel extends JComponent {
 
         firePropertyChange("min", oldMin, min);
 
-        //updateMinLabel();
-
     }
 
-    private void updateMinLabel() {
-        if (minLabel != null) {
-            minLabel.setText(String.valueOf(min));   //met à jour l'affichage
-        }
-    }
 
-    private void updateMaxLabel() {
-        if (maxLabel != null) {
-            maxLabel.setText(String.valueOf(max));   //met à jour l'affichage
-        }
-    }
-
-    public void setMinLabel(JLabel minLabel) {
-        this.minLabel = minLabel;
-        updateMinLabel();
-    }
-
-    public void setMaxLabel(JLabel maxLabel) {
-        this.maxLabel = maxLabel;
-        updateMaxLabel();
-    }
 
 }

@@ -20,7 +20,7 @@ import java.beans.PropertyChangeListener;
 public class RangeSliderControler {
 
     //Attributes
-    private ArrowIcon leftArrow, rightArrow;
+    private final ArrowIcon leftArrow, rightArrow;
     private Bar leftBar, rightBar;
     private MiddleBar lift;
     private RangeSlider slider;
@@ -46,7 +46,7 @@ public class RangeSliderControler {
         MIN = slider.getMin();
         MAX = slider.getMax();
         this.sliderX = slider.getX();
-        this.sliderWidth = (double) ( leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width );
+        this.sliderWidth = (double) (leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width );
 
         leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
@@ -121,10 +121,6 @@ public class RangeSliderControler {
     private int fromPixtoValue(double pix) {
         double value = pix * (double) MAX / (double)sliderWidth;
         return (int) value;
-    }
-
-    private void processWidth() {
-        setSliderWidth(slider.getWidth());
     }
 
 }

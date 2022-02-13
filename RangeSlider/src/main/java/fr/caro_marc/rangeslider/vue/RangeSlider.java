@@ -71,7 +71,6 @@ public class RangeSlider extends JPanel {
         setBackground(Color.red);
         
         
-        initiate();
     }
 
     //Getters & setters
@@ -99,21 +98,10 @@ public class RangeSlider extends JPanel {
         this.MAX = MAX;
     }
     
-    public void setMinLabel(JLabel label) {
-        model.setMinLabel(label);
-    }
-    
-    public void setMaxLabel(JLabel label) {
-        model.setMaxLabel(label);
-    }
+
     
 
     //Methods
-    
-    private void initiate() {
-        leftArrow.setMyX(leftBar.getPreferredSize().width);
-        rightArrow.setMyX(leftBar.getPreferredSize().width + 2*leftArrow.getPreferredSize().width + lift.getPreferredSize().width);
-    }
     
     
     

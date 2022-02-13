@@ -5,8 +5,6 @@
 package fr.caro_marc.rangeslider.controler;
 
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
-import fr.caro_marc.rangeslider.model.RangeSliderModelEvent;
-import fr.caro_marc.rangeslider.model.RangeSliderModelListener;
 import fr.caro_marc.rangeslider.vue.RangeSlider;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
