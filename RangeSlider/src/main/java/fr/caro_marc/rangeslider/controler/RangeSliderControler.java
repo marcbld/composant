@@ -9,13 +9,9 @@ import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.Bar;
 import fr.caro_marc.component.bar.MiddleBar;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
-import fr.caro_marc.rangeslider.model.RangeSliderModelEvent;
-import fr.caro_marc.rangeslider.model.RangeSliderModelListener;
 import fr.caro_marc.rangeslider.vue.RangeSlider;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  *
