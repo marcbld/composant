@@ -47,7 +47,7 @@ public class RangeSliderControler {
         this.sliderX = slider.getX();
         this.sliderWidth = (double) (leftBar.getPreferredSize().width + 2 * leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width);
 
-        /*leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
+        leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 //prevenir le modèle du changement de min après calcul
@@ -55,7 +55,7 @@ public class RangeSliderControler {
                 model.setMin(fromPixtoValue(clickPosition));
 
             }
-        });*/
+        });
 
         leftArrow.addPropertyChangeListener("delta", new PropertyChangeListener() {
             @Override
@@ -75,6 +75,8 @@ public class RangeSliderControler {
                 //previent le modèle du changement de min et max (après calcul)
                 double delta = (int) evt.getNewValue();
                 double value = fromPixtoValue(delta);
+                
+                System.out.println("Controler: lift --> " + delta +  " /// " + value);
 
                 model.setMin((double)model.getMin() + value);
                 model.setMax((double)model.getMax() + value);

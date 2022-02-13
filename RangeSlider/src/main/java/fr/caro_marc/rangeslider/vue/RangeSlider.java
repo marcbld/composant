@@ -71,6 +71,11 @@ public class RangeSlider extends JPanel {
         setBackground(Color.red);
         
         
+        //model.initializer();
+        leftArrow.initialier(leftBar.getPreferredSize().width);
+        rightArrow.initialier(leftBar.getPreferredSize().width + lift.getPreferredSize().width + 2*leftArrow.getPreferredSize().width);
+        
+        
     }
 
     //Getters & setters

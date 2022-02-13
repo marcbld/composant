@@ -29,7 +29,6 @@ public class MiddleBar extends JButton {
     private final static Color DEFAULT_COLOR = Color.BLUE;
     private final RangeSliderAdapter adapter;
 
-    private boolean clicked = false;
     private int xMouseDown;
 
     //Constructeur
@@ -46,13 +45,7 @@ public class MiddleBar extends JButton {
 
             @Override
             public void mousePressed(MouseEvent e) {
-                clicked = true;
                 xMouseDown = e.getXOnScreen();
-            }
-
-            @Override
-            public void mouseReleased(MouseEvent e) {
-                clicked = false;
             }
 
         });
@@ -61,14 +54,9 @@ public class MiddleBar extends JButton {
 
             @Override
             public void mouseDragged(MouseEvent e) {
-                if (clicked) {
-                    int delta = e.getXOnScreen() - xMouseDown;
-                    if (Math.abs(delta) >= 5) {
-                        firePropertyChange("drag", 0, delta);
-                        xMouseDown = e.getXOnScreen();
-                    }
-
-                }
+                int delta = e.getXOnScreen() - xMouseDown;
+                firePropertyChange("drag", 0, delta);
+                xMouseDown = e.getXOnScreen();
             }
 
         });

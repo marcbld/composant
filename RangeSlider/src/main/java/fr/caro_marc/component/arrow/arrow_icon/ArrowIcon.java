@@ -97,7 +97,6 @@ public class ArrowIcon extends JButton {
         this.addMouseListener(new MouseAdapter() {
             @Override
             public void mousePressed(MouseEvent e) {
-                //TODO
                 xPosition = e.getXOnScreen();
             }
 
@@ -160,6 +159,19 @@ public class ArrowIcon extends JButton {
     @Override
     public final Dimension getPreferredSize() {
         return new Dimension(20, 20);
+    }
+
+    public void initialier(int size) {
+        switch (myType) {
+            case LEFT:
+                System.out.println("ArrowIcon: LEFT --> " + getX());
+                firePropertyChange("delta", 0, size);
+                break;
+            case RIGHT:
+                System.out.println("ArrowIcon: RIGHT --> " + getX());
+                firePropertyChange("delta", 0, size);
+                break;
+        }
     }
 
 }

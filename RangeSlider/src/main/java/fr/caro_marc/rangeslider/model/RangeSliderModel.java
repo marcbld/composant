@@ -36,6 +36,11 @@ public class RangeSliderModel extends JComponent {
         max = MAX;
         min = MIN;
     }
+    
+    public void initializer(){
+        setMin(MIN);
+        setMax(MAX);
+    }
 
     //Getters & setters
     public double getMax() {
@@ -51,6 +56,8 @@ public class RangeSliderModel extends JComponent {
         } else {
             max = aMax;
         }
+        
+        System.out.println("Modele: max --> " + aMax + " /// " + max);
 
         firePropertyChange("max", oldMax, max);
 
@@ -70,11 +77,14 @@ public class RangeSliderModel extends JComponent {
             min = aMin;
         }
         
-        //System.out.println("Modele: min --> " + aMin + " /// " + min);
+        System.out.println("Modele: min --> " + aMin + " /// " + min);
 
         firePropertyChange("min", oldMin, min);
 
     }
+    
+    
+    
 
 
 
