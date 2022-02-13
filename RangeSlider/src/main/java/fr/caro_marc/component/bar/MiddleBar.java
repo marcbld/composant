@@ -24,7 +24,7 @@ import javax.swing.JButton;
 public class MiddleBar extends JButton {
 
     //Attributs 
-    private final static int DEFAULT_WIDTH = 100;
+    private final static int DEFAULT_WIDTH = 200;
     private final static int DEFAULT_HEIGHT = 20;
     private final static Color DEFAULT_COLOR = Color.BLUE;
     private final RangeSliderAdapter adapter;

@@ -5,6 +5,7 @@
 package fr.caro_marc.component.bar;
 
 import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
+import java.awt.Dimension;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
@@ -30,6 +31,13 @@ public class LeftBar extends Bar{
         });
         
     }
+
+    @Override
+    public Dimension getPreferredSize() {
+        return new Dimension(0, super.getPreferredSize().height); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/OverriddenMethodBody
+    }
+    
+    
 
     
     
