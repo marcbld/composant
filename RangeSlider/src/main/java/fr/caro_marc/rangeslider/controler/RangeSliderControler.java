@@ -47,6 +47,21 @@ public class RangeSliderControler {
         this.sliderX = slider.getX();
         this.sliderWidth = (double) (leftBar.getPreferredSize().width + 2 * leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width);
 
+        
+        model.addPropertyChangeListener("MAX", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                MAX = (int) evt.getNewValue();
+            }
+        });
+        
+        model.addPropertyChangeListener("MIN", new PropertyChangeListener() {
+            @Override
+            public void propertyChange(PropertyChangeEvent evt) {
+                MIN = (int) evt.getNewValue();
+            }
+        });
+        
         leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -119,6 +134,13 @@ public class RangeSliderControler {
         //System.out.println("Controler: après traitement --> " + value);
 
         return value;
+    }
+    
+    
+    public void setModel(RangeSliderModel model) {
+        this.model = model;
+        MIN = model.getMIN();
+        MAX = model.getMAX();
     }
 
 }

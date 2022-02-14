@@ -92,7 +92,8 @@ public class RangeSlider extends JPanel {
 
     public void setModel(RangeSliderModel model) {
         this.model = model;
-        //TODO appeler toutes les mises à jour
+        adapter.setModel(model);
+        control.setModel(model);
     }
 
     public int getMin() {
@@ -101,6 +102,7 @@ public class RangeSlider extends JPanel {
 
     public void setMin(int MIN) {
         this.MIN = MIN;
+        model.setMIN(MIN);
     }
 
     public int getMax() {
@@ -109,6 +111,7 @@ public class RangeSlider extends JPanel {
 
     public void setMax(int MAX) {
         this.MAX = MAX;
+        model.setMAX(MAX);
     }
     
     public void setMinDisplay(JComponent display) {

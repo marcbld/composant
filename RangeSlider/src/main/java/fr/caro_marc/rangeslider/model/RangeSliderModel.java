@@ -11,19 +11,17 @@ import javax.swing.JComponent;
 import javax.swing.JLabel;
 
 /**
- * La classe gère les valeurs min et max et prévient les différents composants
- * de ses modifications
+ * La classe gère les valeurs min et max et prévient les différents composants de ses modifications
  *
  * @author blanchma
  */
 public class RangeSliderModel extends JComponent {
 
-    private final int MAX, MIN;
+    private int MAX, MIN;
     private double max, min;
     private static final int DEFAULT_MIN = 0;
     private static final int DEFAULT_MAX = 500;
     private static int OFFSET = 15;
-
 
     //Constructors
     public RangeSliderModel() {
@@ -37,8 +35,8 @@ public class RangeSliderModel extends JComponent {
         min = MIN;
         OFFSET = (MAX - MIN) / 5;
     }
-    
-    public void initializer(){
+
+    public void initializer() {
         setMin(MIN);
         setMax(MAX);
     }
@@ -57,7 +55,7 @@ public class RangeSliderModel extends JComponent {
         } else {
             max = aMax;
         }
-        
+
         System.out.println("Modele: max --> " + aMax + " /// " + max);
 
         firePropertyChange("max", oldMax, max);
@@ -77,16 +75,37 @@ public class RangeSliderModel extends JComponent {
         } else {
             min = aMin;
         }
-        
+
         System.out.println("Modele: min --> " + aMin + " /// " + min);
 
         firePropertyChange("min", oldMin, min);
 
     }
-    
-    
-    
 
+    public void setMAX(int MAX) {
+        if (MAX >= MIN) {
+            int oldMAX = this.MAX;
+            this.MAX = MAX;
+            firePropertyChange("MAX", oldMAX, MAX);
+        }
+    }
 
+    public int getMAX() {
+        return MAX;
+    }
+
+   
+
+    public void setMIN(int MIN) {
+        if (MIN <= MAX) {
+            int oldMIN = this.MIN;
+            this.MIN = MIN;
+            firePropertyChange("MIN", oldMIN, MIN);
+        }
+    }
+    
+     public int getMIN() {
+        return MIN;
+    }
 
 }
