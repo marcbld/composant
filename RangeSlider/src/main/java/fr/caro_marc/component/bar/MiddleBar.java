@@ -4,7 +4,7 @@
  */
 package fr.caro_marc.component.bar;
 
-import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
+import fr.caro_marc.component.arrow_icon.ArrowIcon;
 import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -42,12 +42,10 @@ public class MiddleBar extends JButton {
         setBackground(aColor);
 
         this.addMouseListener(new MouseAdapter() {
-
             @Override
             public void mousePressed(MouseEvent e) {
                 xMouseDown = e.getXOnScreen();
             }
-
         });
 
         this.addMouseMotionListener(new MouseAdapter() {

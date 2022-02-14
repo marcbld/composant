@@ -5,7 +5,7 @@
  */
 package fr.caro_marc.rangeslider.controler;
 
-import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
+import fr.caro_marc.component.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.Bar;
 import fr.caro_marc.component.bar.MiddleBar;
 import fr.caro_marc.rangeslider.model.RangeSliderModel;
@@ -100,6 +100,7 @@ public class RangeSliderControler {
             public void propertyChange(PropertyChangeEvent evt) {
                 //prévient le modèle du changement de max (après calcul)
                 double clickPosition = (int) evt.getNewValue() + rightBar.getX();
+                model.setMax(fromPixtoValue(clickPosition));
             }
         });
 

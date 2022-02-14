@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package fr.caro_marc.component.arrow.arrow_icon;
+package fr.caro_marc.component.arrow_icon;
 
 import fr.caro_marc.rangeslider.controler.RangeSliderAdapter;
 import java.awt.Color;
@@ -28,7 +28,6 @@ public class ArrowIcon extends JButton {
     public final static int RIGHT = 1;
     public final static int LEFT = 2;
     public final static int SIZE = 20;
-    private boolean selfTriggered = false;
 
     private final static Icon RIGHT_ICON = new Icon() {
 
@@ -130,6 +129,8 @@ public class ArrowIcon extends JButton {
             public void propertyChange(PropertyChangeEvent evt) {
                 if (myType == RIGHT) {
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
+                    System.out.println("ArrowIcon: right --> " + delta);
+                    System.out.println("ArrowIcon: right --> " + (getX() + delta));
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
                 }
 
@@ -164,11 +165,11 @@ public class ArrowIcon extends JButton {
     public void initialier(int size) {
         switch (myType) {
             case LEFT:
-                System.out.println("ArrowIcon: LEFT --> " + getX());
+                System.out.println("ArrowIcon: LEFT --> " + size);
                 firePropertyChange("delta", 0, size);
                 break;
             case RIGHT:
-                System.out.println("ArrowIcon: RIGHT --> " + getX());
+                System.out.println("ArrowIcon: RIGHT --> " + size);
                 firePropertyChange("delta", 0, size);
                 break;
         }

@@ -77,7 +77,7 @@ public class RangeSliderModel extends JComponent {
             min = aMin;
         }
         
-        System.out.println("Modele: min --> " + aMin + " /// " + min);
+        //System.out.println("Modele: min --> " + aMin + " /// " + min);
 
         firePropertyChange("min", oldMin, min);
 

@@ -6,7 +6,7 @@
 package fr.caro_marc.rangeslider.vue;
 
 
-import fr.caro_marc.component.arrow.arrow_icon.ArrowIcon;
+import fr.caro_marc.component.arrow_icon.ArrowIcon;
 import fr.caro_marc.component.bar.LeftBar;
 import fr.caro_marc.component.bar.MiddleBar;
 import fr.caro_marc.component.bar.RightBar;
