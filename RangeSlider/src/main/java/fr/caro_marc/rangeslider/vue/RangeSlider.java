@@ -16,7 +16,6 @@ import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -39,7 +38,7 @@ public class RangeSlider extends JPanel {
     private RangeSliderControler control;
     private RangeSliderAdapter adapter;
 
-    private static int MIN = 0, MAX = 100;
+    private static int MIN = -100, MAX = 100;
 
     //Constructor
     public RangeSlider() {
@@ -71,9 +70,9 @@ public class RangeSlider extends JPanel {
         setBackground(Color.red);
         
         
-        //model.initializer();
-        leftArrow.initialier(leftBar.getPreferredSize().width);
-        rightArrow.initialier(leftBar.getPreferredSize().width + lift.getPreferredSize().width + 2*leftArrow.getPreferredSize().width);
+        model.initializer();
+        //leftArrow.initialier(leftBar.getPreferredSize().width);
+        //rightArrow.initialier(leftBar.getPreferredSize().width + lift.getPreferredSize().width + 2*leftArrow.getPreferredSize().width);
         
         
     }

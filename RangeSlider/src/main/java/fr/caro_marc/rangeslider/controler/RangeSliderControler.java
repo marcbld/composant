@@ -117,7 +117,7 @@ public class RangeSliderControler {
     //Methods
     private double fromPixtoValue(double pix) {
         //System.out.println("Controller: avant traitement --> " + pix);
-        double value = pix * (double) (MAX - MIN) / (double) sliderWidth + MIN;
+        double value = pix * ((double) (MAX - MIN) / (double) sliderWidth) + (double) MIN;
         //System.out.println("Controler: après traitement --> " + value);
 
         return value;

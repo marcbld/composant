@@ -49,7 +49,7 @@ public class RangeSliderAdapter extends JComponent{
                     maxPix = newVal;
                     leftInitialised = true;
                 }
-                
+                System.out.println("Adapter: max --> " + newVal);
                 firePropertyChange("maxPix", maxPix, newVal);
                 maxPix = newVal;
             }
@@ -61,7 +61,7 @@ public class RangeSliderAdapter extends JComponent{
                 double newVal = fromValuetoPix((double)evt.getNewValue());
                 
                 if (!rightInitialised) {
-                    maxPix = newVal;
+                    minPix = newVal;
                     rightInitialised = true;
                 }
                 
@@ -73,7 +73,7 @@ public class RangeSliderAdapter extends JComponent{
     }
     
      private int fromValuetoPix(double value) {
-        double pix = value * (double)sliderWidth / (double) (MAX - MIN) ;
+        double pix =  value * (double)sliderWidth / (double) (MAX - MIN) + (double)sliderWidth / (1 - (double)MAX/ (double)MIN) ;
         return (int)pix;
     } 
 
