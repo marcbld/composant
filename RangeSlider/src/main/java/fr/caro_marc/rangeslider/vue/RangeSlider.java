@@ -38,11 +38,15 @@ public class RangeSlider extends JPanel {
     private RangeSliderControler control;
     private RangeSliderAdapter adapter;
 
-    private static int MIN = -100, MAX = 100;
+    private static int MIN = -100, MAX = -5;
 
     //Constructor
     public RangeSlider() {
         this(new RangeSliderModel(MIN, MAX));
+    }
+    
+    public RangeSlider(int min, int max) {
+        this(new RangeSliderModel(min, max));
     }
 
     public RangeSlider(RangeSliderModel aModel) {
@@ -84,6 +88,7 @@ public class RangeSlider extends JPanel {
 
     public void setModel(RangeSliderModel model) {
         this.model = model;
+        //TODO appeler toutes les mises à jour
     }
 
     public int getMin() {

@@ -22,7 +22,7 @@ public class RangeSliderModel extends JComponent {
     private double max, min;
     private static final int DEFAULT_MIN = 0;
     private static final int DEFAULT_MAX = 500;
-    private static final int OFFSET = 15;
+    private static int OFFSET = 15;
 
 
     //Constructors
@@ -35,6 +35,7 @@ public class RangeSliderModel extends JComponent {
         MIN = aMIN;
         max = MAX;
         min = MIN;
+        OFFSET = (MAX - MIN) / 5;
     }
     
     public void initializer(){
