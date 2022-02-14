@@ -16,6 +16,10 @@ import fr.caro_marc.rangeslider.model.RangeSliderModel;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -37,8 +41,10 @@ public class RangeSlider extends JPanel {
     private RangeSliderModel model;
     private RangeSliderControler control;
     private RangeSliderAdapter adapter;
+    
+    private JLabel minDisplay, maxDisplay;
 
-    private static int MIN = -100, MAX = -5;
+    private static int MIN = 100, MAX = 500;
 
     //Constructor
     public RangeSlider() {
@@ -71,12 +77,10 @@ public class RangeSlider extends JPanel {
         add(lift);
         add(rightArrow);
         add(rightBar);
-        setBackground(Color.red);
         
         
         model.initializer();
-        //leftArrow.initialier(leftBar.getPreferredSize().width);
-        //rightArrow.initialier(leftBar.getPreferredSize().width + lift.getPreferredSize().width + 2*leftArrow.getPreferredSize().width);
+       
         
         
     }
@@ -105,6 +109,14 @@ public class RangeSlider extends JPanel {
 
     public void setMax(int MAX) {
         this.MAX = MAX;
+    }
+    
+    public void setMinDisplay(JComponent display) {
+        minDisplay = (JLabel) display;
+    }
+    
+    public void setMaxDisplay(JComponent display) {
+        maxDisplay = (JLabel) display;
     }
     
 

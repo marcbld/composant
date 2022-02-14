@@ -130,8 +130,8 @@ public class ArrowIcon extends JButton {
                 if (myType == RIGHT) {
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
                     System.out.println("ArrowIcon: right --> " + delta);
-                    //System.out.println("ArrowIcon: right --> " + getX());
-                    //System.out.println("ArrowIcon: right --> " + (getX() + delta));
+                    System.out.println("ArrowIcon: right --> " + getX());
+                    System.out.println("ArrowIcon: right --> " + (getX() + delta));
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
                 }
 
