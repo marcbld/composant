@@ -90,7 +90,6 @@ public class RangeSliderControler {
                 double delta = (int) evt.getNewValue();
                 double value = fromPixtoValue(delta);
 
-                //System.out.println("Controler: lift --> " + delta +  " /// " + value);
                 model.setMin((double) model.getMin() + value);
                 model.setMax((double) model.getMax() + value);
 
@@ -129,9 +128,7 @@ public class RangeSliderControler {
 
     //Methods
     private double fromPixtoValue(double pix) {
-        //System.out.println("Controller: avant traitement --> " + pix);
         double value = pix * ((double) (MAX - MIN) / (double) sliderWidth); //+ (double) MIN;
-        //System.out.println("Controler: après traitement --> " + value);
 
         return value;
     }

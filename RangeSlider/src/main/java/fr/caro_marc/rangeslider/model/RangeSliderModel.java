@@ -34,7 +34,6 @@ public class RangeSliderModel extends JComponent {
         max = MAX;
         min = MIN;
         setOffset();
-        System.out.println("Modele: constructor --> "+ MIN + " /// " + MAX );
     }
 
     public void initializer() {
@@ -53,12 +52,9 @@ public class RangeSliderModel extends JComponent {
             max = MAX;
         } else if (aMax <= min + OFFSET) {
             max = min + OFFSET;
-            System.out.println("Modele: offset triggered");
         } else {
             max = aMax;
         }
-
-        System.out.println("Modele: max --> " + aMax + " /// " + max);
 
         firePropertyChange("max", oldMax, max);
 
@@ -78,25 +74,21 @@ public class RangeSliderModel extends JComponent {
             min = aMin;
         }
 
-        System.out.println("Modele: min --> " + aMin + " /// " + min);
-
         firePropertyChange("min", oldMin, min);
 
     }
 
     public void setMAX(int MAX) {
-        if (MAX >= MIN) {
-            int oldMAX = this.MAX;
-            this.MAX = MAX;
-            setOffset();
-            firePropertyChange("MAX", oldMAX, MAX);
-            
-            
-            if (max >= oldMAX) {
-                System.out.println("Modele: setMax --> "+ max);
-                max = MAX;
-            }
+        //if (MAX >= MIN) {
+        int oldMAX = this.MAX;
+        this.MAX = MAX;
+        setOffset();
+        firePropertyChange("MAX", oldMAX, MAX);
+
+        if (max >= oldMAX) {
+            max = MAX;
         }
+        //}
     }
 
     public int getMAX() {
@@ -104,26 +96,29 @@ public class RangeSliderModel extends JComponent {
     }
 
     public void setMIN(int MIN) {
-        if (MIN <= MAX) {
-            int oldMIN = this.MIN;
-            this.MIN = MIN;
-            setOffset();
-            firePropertyChange("MIN", oldMIN, MIN);
-            
-            if (min <= oldMIN) {
-                min = MIN;
-            }
+        //if (MIN <= MAX) {
+        int oldMIN = this.MIN;
+        this.MIN = MIN;
+        setOffset();
+        firePropertyChange("MIN", oldMIN, MIN);
+
+        if (min <= oldMIN) {
+            min = MIN;
         }
+        //}
     }
 
     public int getMIN() {
         return MIN;
     }
-    
-    private void setOffset(){
-        OFFSET = (int) ((double) (MAX - MIN) / (double) 5 );
-        System.out.println("Modele: min et max --> " + MIN + " /// "+ MAX);
-        System.out.println("Modele: offset --> " + OFFSET);
+
+    private void setOffset() {
+        int tempo = (int) ((double) (MAX - MIN) / (double) 5);
+        if (tempo > 0) {
+            OFFSET = tempo;
+        } else {
+            OFFSET = 1;
+        }
     }
 
 }

@@ -42,7 +42,6 @@ public class RangeSlider extends JPanel {
     private RangeSliderControler control;
     private RangeSliderAdapter adapter;
     
-    private JLabel minDisplay, maxDisplay;
 
     private static int MIN = 100, MAX = 500;
 
@@ -53,7 +52,6 @@ public class RangeSlider extends JPanel {
     
     public RangeSlider(int min, int max) {
         this(new RangeSliderModel(min, max));
-        System.out.println("i'm used");
     }
 
     public RangeSlider(RangeSliderModel aModel) {
@@ -103,7 +101,6 @@ public class RangeSlider extends JPanel {
 
     public void setMin(int MIN) {
         this.MIN = MIN;
-        System.out.println("RangeSlider: setMin --> called");
         model.setMIN(MIN);
     }
 
@@ -116,13 +113,6 @@ public class RangeSlider extends JPanel {
         model.setMAX(MAX);
     }
     
-    public void setMinDisplay(JComponent display) {
-        minDisplay = (JLabel) display;
-    }
-    
-    public void setMaxDisplay(JComponent display) {
-        maxDisplay = (JLabel) display;
-    }
     
 
     

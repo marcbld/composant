@@ -105,7 +105,6 @@ public class ArrowIcon extends JButton {
             @Override
             public void mouseDragged(MouseEvent e) {
                 int x = e.getXOnScreen();
-                //System.out.println("ArrowIcon: delta -->" + (x - xPosition));
                 firePropertyChange("delta", 0, x - xPosition);
                 xPosition = x;
             }
@@ -129,9 +128,6 @@ public class ArrowIcon extends JButton {
             public void propertyChange(PropertyChangeEvent evt) {
                 if (myType == RIGHT) {
                     double delta = (double) evt.getNewValue() - (double) evt.getOldValue();
-                    System.out.println("ArrowIcon: right --> " + delta);
-                    System.out.println("ArrowIcon: right --> " + getX());
-                    System.out.println("ArrowIcon: right --> " + (getX() + delta));
                     setBounds(getX() + (int) delta, getY(), getWidth(), getHeight());
                 }
 
@@ -166,11 +162,9 @@ public class ArrowIcon extends JButton {
     public void initialier(int size) {
         switch (myType) {
             case LEFT:
-                System.out.println("ArrowIcon: LEFT --> " + size);
                 firePropertyChange("delta", 0, size);
                 break;
             case RIGHT:
-                System.out.println("ArrowIcon: RIGHT --> " + size);
                 firePropertyChange("delta", 0, size);
                 break;
         }

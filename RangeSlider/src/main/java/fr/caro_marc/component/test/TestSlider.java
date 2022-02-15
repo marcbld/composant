@@ -90,7 +90,7 @@ public class TestSlider extends javax.swing.JFrame {
         jTextField4.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         jTextField4.setText("jTextField4");
 
-        rangeSlider1.setMax(600);
+        rangeSlider1.setMax(1);
         rangeSlider1.setMin(0);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

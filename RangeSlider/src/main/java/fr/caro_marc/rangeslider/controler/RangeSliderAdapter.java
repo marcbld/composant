@@ -46,14 +46,12 @@ public class RangeSliderAdapter extends JComponent{
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
                 
-                System.out.println("j'entends et j'écoute");
                 double newVal = fromValuetoPix((double)evt.getNewValue());
                 
                 if (!leftInitialised) {
                     maxPix = newVal;
                     leftInitialised = true;
                 }
-                System.out.println("Adapter: max --> " + newVal);
                 firePropertyChange("maxPix", maxPix, newVal);
                 maxPix = newVal;
             }
