@@ -33,7 +33,8 @@ public class RangeSliderModel extends JComponent {
         MIN = aMIN;
         max = MAX;
         min = MIN;
-        OFFSET = (MAX - MIN) / 5;
+        setOffset();
+        System.out.println("Modele: constructor --> "+ MIN + " /// " + MAX );
     }
 
     public void initializer() {
@@ -52,6 +53,7 @@ public class RangeSliderModel extends JComponent {
             max = MAX;
         } else if (aMax <= min + OFFSET) {
             max = min + OFFSET;
+            System.out.println("Modele: offset triggered");
         } else {
             max = aMax;
         }
@@ -86,7 +88,14 @@ public class RangeSliderModel extends JComponent {
         if (MAX >= MIN) {
             int oldMAX = this.MAX;
             this.MAX = MAX;
+            setOffset();
             firePropertyChange("MAX", oldMAX, MAX);
+            
+            
+            if (max >= oldMAX) {
+                System.out.println("Modele: setMax --> "+ max);
+                max = MAX;
+            }
         }
     }
 
@@ -94,18 +103,27 @@ public class RangeSliderModel extends JComponent {
         return MAX;
     }
 
-   
-
     public void setMIN(int MIN) {
         if (MIN <= MAX) {
             int oldMIN = this.MIN;
             this.MIN = MIN;
+            setOffset();
             firePropertyChange("MIN", oldMIN, MIN);
+            
+            if (min <= oldMIN) {
+                min = MIN;
+            }
         }
     }
-    
-     public int getMIN() {
+
+    public int getMIN() {
         return MIN;
+    }
+    
+    private void setOffset(){
+        OFFSET = (int) ((double) (MAX - MIN) / (double) 5 );
+        System.out.println("Modele: min et max --> " + MIN + " /// "+ MAX);
+        System.out.println("Modele: offset --> " + OFFSET);
     }
 
 }
