@@ -14,7 +14,7 @@ import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
 /**
- *
+ * le controleur permet de transformer les données de pixels en valeur pour les transférer au modèle
  * @author blanchma
  */
 public class RangeSliderControler {
@@ -47,7 +47,7 @@ public class RangeSliderControler {
         this.sliderX = slider.getX();
         this.sliderWidth = (double) (leftBar.getPreferredSize().width + 2 * leftArrow.getPreferredSize().width + lift.getPreferredSize().width + rightBar.getPreferredSize().width);
 
-        
+        //ecouteur sur la modification de MAX du modèle
         model.addPropertyChangeListener("MAX", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -55,6 +55,8 @@ public class RangeSliderControler {
             }
         });
         
+        
+        //ecouteur sur la modification de MIN du modèle
         model.addPropertyChangeListener("MIN", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -62,6 +64,7 @@ public class RangeSliderControler {
             }
         });
         
+        //ecouteur de nouvelle valeur de la leftBar
         leftBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -73,6 +76,7 @@ public class RangeSliderControler {
             }
         });
 
+        //ecouteur de nouvelle valeur de la leftArrow
         leftArrow.addPropertyChangeListener("delta", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -83,6 +87,8 @@ public class RangeSliderControler {
             }
         });
 
+        
+        //ecouteur de la nouvelle valeur du lift
         lift.addPropertyChangeListener("drag", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
@@ -96,6 +102,7 @@ public class RangeSliderControler {
             }
         });
 
+        //ecouteur de la nouvelle valeur de la rightArrow
         rightArrow.addPropertyChangeListener("delta", new PropertyChangeListener() {
             //previent le modèle du changement de max (après calcul)
             @Override
@@ -107,6 +114,7 @@ public class RangeSliderControler {
             }
         });
 
+        //ecouteur de la nouvelle valeur de la rightBar
         rightBar.addPropertyChangeListener("clickPosition", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {

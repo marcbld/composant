@@ -136,8 +136,8 @@
     </Component>
     <Component class="fr.caro_marc.rangeslider.vue.RangeSlider" name="rangeSlider1">
       <Properties>
-        <Property name="max" type="int" value="1"/>
-        <Property name="min" type="int" value="0"/>
+        <Property name="max" type="int" value="100"/>
+        <Property name="min" type="int" value="50"/>
       </Properties>
     </Component>
   </SubComponents>

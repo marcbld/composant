@@ -62,7 +62,7 @@ public class MiddleBar extends JButton {
         adapter.addPropertyChangeListener("minPix", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                //previent le modèle du changement de min et max (après calcul)
+                //modifie la largeur sur une modif de la borne gauche
                 updateMin(evt);
 
             }
@@ -71,7 +71,7 @@ public class MiddleBar extends JButton {
         adapter.addPropertyChangeListener("maxPix", new PropertyChangeListener() {
             @Override
             public void propertyChange(PropertyChangeEvent evt) {
-                //previent le modèle du changement de min et max (après calcul)
+                //modifie la largeur sur une modif de la borne droite
                 updateMax(evt);
 
             }

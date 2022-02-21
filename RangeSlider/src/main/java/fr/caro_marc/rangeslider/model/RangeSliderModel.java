@@ -85,7 +85,7 @@ public class RangeSliderModel extends JComponent {
         setOffset();
         firePropertyChange("MAX", oldMAX, MAX);
 
-        if (max >= oldMAX) {
+        if (max >= oldMAX) {  //modifie la valeur de max si besoin
             max = MAX;
         }
         //}
@@ -102,7 +102,7 @@ public class RangeSliderModel extends JComponent {
         setOffset();
         firePropertyChange("MIN", oldMIN, MIN);
 
-        if (min <= oldMIN) {
+        if (min <= oldMIN) { //modifie la valeur de min si besoin
             min = MIN;
         }
         //}
@@ -112,6 +112,10 @@ public class RangeSliderModel extends JComponent {
         return MIN;
     }
 
+    /**
+     * l'offset permet de ne pas faire disparaitre la lift bar, ici on choisit 
+     * 1/5 de la largeur comme offset
+     */
     private void setOffset() {
         int tempo = (int) ((double) (MAX - MIN) / (double) 5);
         if (tempo > 0) {
